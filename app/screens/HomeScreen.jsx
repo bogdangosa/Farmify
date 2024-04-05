@@ -48,7 +48,7 @@ const HomeScreen = ({navigation}) => {
                 <View style={styles.farmer_cards_container}>
                     {FarmersData?.map((farmer, index) => {
                         return (
-                            <FarmerCard onPress={()=>openFarmerScreen(index)} title={farmer.name} description={farmer.description}/>
+                            <FarmerCard key={index} onPress={()=>openFarmerScreen(farmer.id)} title={farmer.name} description={farmer.description}/>
                         );
                     })}
                 </View>
