@@ -1,16 +1,16 @@
 import React from 'react';
 import {  useUserContext } from './app/contexts/UserContext';
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './AuthStack';
+import AuthentificationStack from './AuthentificationStack';
 import LoggedInStack from './LoggedInStack';
 
 const AppLayout = () => {
-    const user = useUserContext();
+    const user = undefined;
 
     return (
         <NavigationContainer>
             {user!=undefined? 
-            <LoggedInStack />:<AuthStack />}
+            <LoggedInStack />:<AuthentificationStack />}
         </NavigationContainer>
     );
 };
