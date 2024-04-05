@@ -57,7 +57,7 @@ const SimpleButton = ({
     },
     buttonText: {
       color: COLORS.background,
-      fontStyle: "normal",
+      fontFamily: "Nunito_400Regular",
       fontSize: 16,
       // Add any additional styles or override default styles here
     },

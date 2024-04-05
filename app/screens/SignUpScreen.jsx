@@ -32,7 +32,7 @@ const SignUpScreen = ({navigation}) => {
         <View style={styles.container}>
             <View style={styles.top_bar_buttons}>
                 <Text style={styles.top_bar_buttons_text}>Login</Text>
-                <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]} onPress={()=> navigation.navigate('SignUp')}>Sign up</Text>
+                <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]} onPress={()=> navigation.navigate('Login')}>Sign up</Text>
             </View>
             <TextInput
                 style={styles.input}

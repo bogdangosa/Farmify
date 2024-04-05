@@ -70,11 +70,14 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     top_bar_buttons_text: {
         fontSize: 16,
+        fontFamily:'Nunito_700Bold'
     
     },
     top_bar_buttons: {
+        width: '100%',
+        marginBottom: 20,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         gap: 20,
     },
     container: {
@@ -91,6 +94,15 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         paddingHorizontal: 8,
     },
+    forgot_password_text: {
+        marginTop: 16,
+        fontSize: 16,
+        fontFamily:'Nunito_400Regular'
+    },
+    forgot_password_text_highlight: {
+        color: COLORS.accent,
+        fontFamily:'Nunito_700Bold'
+    }
 });
 
 export default LoginScreen;
