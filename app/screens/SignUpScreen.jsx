@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text,TextInput, Button, StyleSheet } from 'react-native';
 import { COLORS } from '../constants/colors';
-import { sendPasswordResetEmail } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../firebaseConfig';
+import SimpleButton from '../components/Buttons/SimpleButton';
 
 const SignUpScreen = ({navigation}) => {
     const [Name, setName] = useState('');
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
+    const [Loading, setLoading] = useState(false);
+    const [ErrorText, setErrorText] = useState('');
     const auth = FIREBASE_AUTH;;
 
     const handleSignup = () => {
-        // Implement your sign-up logic here
-    };
+        setLoading(true);
+        console.log(Email,Password);
+        const response = createUserWithEmailAndPassword(auth,Email,Password  ).then(async(userCredential) => {
+            console.log(userCredential);
+            setLoading(false);
+
+        }).catch((error) => {
+            console.log(error);
+            setLoading(false);
+        });
+        console.log(response);
+    }
 
     
     return (
@@ -40,7 +53,7 @@ const SignUpScreen = ({navigation}) => {
                 onChangeText={setPassword}
                 value={Password}
             />
-            <Button title="Sign Up" onPress={handleSignup} />
+            <SimpleButton title="Sign Up" onPress={handleSignup} />
         </View>
     );
 };
