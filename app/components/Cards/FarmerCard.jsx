@@ -1,9 +1,10 @@
 import {StyleSheet, Text, View} from "react-native";
 import LoggedInStack from "../../../LoggedInStack";
+import {COLORS} from "../../constants/colors";
 
 const FarmerCard = ({title}) => {
     return (
-        <View style={styles.container}>
+        <View style={styles.card}>
             <Text> Hi </Text>
         </View>
     );
@@ -11,17 +12,22 @@ const FarmerCard = ({title}) => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'red',
+    card: {
+        backgroundColor: COLORS.accent,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 25,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        // Add any additional styles or override default styles here
     },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 16,
+    buttonText: {
+        color: COLORS.background,
+        fontStyle: "normal",
+        fontSize: 16,
+        // Add any additional styles or override default styles here
     },
 });
-
 export default FarmerCard;
