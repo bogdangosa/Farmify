@@ -1,30 +1,44 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text,TextInput, Button, StyleSheet } from 'react-native';
+import { COLORS } from '../constants/colors';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { FIREBASE_AUTH } from '../../firebaseConfig';
 
-const SignUpScreen = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const SignUpScreen = ({navigation}) => {
+    const [Name, setName] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+    const auth = FIREBASE_AUTH;;
 
     const handleSignup = () => {
         // Implement your sign-up logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
     };
 
+    
     return (
         <View style={styles.container}>
+            <View style={styles.top_bar_buttons}>
+                <Text style={styles.top_bar_buttons_text}>Login</Text>
+                <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]} onPress={()=> navigation.navigate('SignUp')}>Sign up</Text>
+            </View>
+            <TextInput
+                style={styles.input}
+                placeholder="Name"
+                onChangeText={setName}
+                value={Name}
+            />
             <TextInput
                 style={styles.input}
                 placeholder="Email"
                 onChangeText={setEmail}
-                value={email}
+                value={Email}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
                 secureTextEntry
                 onChangeText={setPassword}
-                value={password}
+                value={Password}
             />
             <Button title="Sign Up" onPress={handleSignup} />
         </View>
@@ -32,6 +46,15 @@ const SignUpScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    top_bar_buttons_text: {
+        fontSize: 16,
+    
+    },
+    top_bar_buttons: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        gap: 20,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',

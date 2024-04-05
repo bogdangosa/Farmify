@@ -1,37 +1,82 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import SimpleButton from '../components/Buttons/SimpleButton';
+import { COLORS } from '../constants/colors';
+import { FIREBASE_AUTH } from '../../firebaseConfig';
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 
-const LoginScreen = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const LoginScreen = ({navigation}) => {
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+    const [Loading, setLoading] = useState(false);
+    const [ErrorText, setErrorText] = useState('');
+    const auth = FIREBASE_AUTH;
 
-    const handleLogin = () => {
-        // Implement your login logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
+    const handleLogin = async () => {
+        const email = Email.replace(/\s/g, '');
+
+        setLoading(true);
+        try{
+            console.log(email,Password);
+            const response = await signInWithEmailAndPassword(auth,email,Password);
+            console.log(response);
+        }
+        catch(error){
+            console.log(error);
+            setErrorText(error.message);
+        }
+        finally{
+            setLoading(false);
+        }
+    };
+
+    const sendResetPasswordEmail = async () => {
+        const email = Email.replace(/\s/g, '');
+        try{
+            await sendPasswordResetEmail(auth,email);
+            //ToastAndroid.show('Request sent successfully!', ToastAndroid.SHORT);
+        }
+        catch(error){
+            console.log(error);
+        }
     };
 
     return (
         <View style={styles.container}>
+            <View style={styles.top_bar_buttons}>
+                <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]}>Login</Text>
+                <Text style={styles.top_bar_buttons_text} onPress={()=> navigation.navigate('SignUp')}>Sign up</Text>
+            </View>
             <TextInput
                 style={styles.input}
                 placeholder="Email"
-                value={email}
+                value={Email}
                 onChangeText={setEmail}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
                 secureTextEntry
-                value={password}
+                value={Password}
                 onChangeText={setPassword}
             />
-            <Button title="Login" onPress={handleLogin} />
+            <SimpleButton title="Login" onPress={handleLogin} />
+            <Text style={styles.forgot_password_text}>Forgot password? <Text style={styles.forgot_password_text_highlight} onPress={()=>sendResetPasswordEmail()}>get it here</Text></Text>  
+        
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    top_bar_buttons_text: {
+        fontSize: 16,
+    
+    },
+    top_bar_buttons: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        gap: 20,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',

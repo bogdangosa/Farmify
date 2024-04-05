@@ -11,6 +11,7 @@ const useUser = () => {
     useEffect(() => {
 
         onAuthStateChanged(FIREBASE_AUTH,(user)=>{
+            setUser(user);
 
         })
     },[]); 
