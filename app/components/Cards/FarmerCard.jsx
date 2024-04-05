@@ -1,27 +1,37 @@
-import {StyleSheet, Text, View} from "react-native";
+import {Pressable, StyleSheet, Text, View} from "react-native";
 import LoggedInStack from "../../../LoggedInStack";
 import {COLORS} from "../../constants/colors";
 
-const FarmerCard = ({title}) => {
+const FarmerCard = ({title,description,onPress}) => {
     return (
-        <View style={styles.card}>
-            <Text> Hi </Text>
-        </View>
+        <Pressable style={styles.card} onPress={onPress}>
+            <Text style={styles.title}> {title} </Text>
+            <Text style={styles.description}> {description} </Text>
+        </Pressable>
     );
 };
 
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: COLORS.accent,
+        backgroundColor: COLORS.background2,
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 25,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
         width: "100%",
         // Add any additional styles or override default styles here
+    },
+    title:{
+        fontSize: 20,
+        fontFamily: "Nunito_700Bold",
+        color: COLORS.primary,
+    },
+    description:{
+        fontSize: 14,
+        fontFamily: "Nunito_400Regular",
+        color: COLORS.secondary,
     },
     buttonText: {
         color: COLORS.background,
