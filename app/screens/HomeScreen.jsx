@@ -6,13 +6,14 @@ import { COLORS } from '../constants/colors';
 import axios from 'axios';
 import NoSubscriptionCard from '../components/Cards/NoSubscriptionCard';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const [FarmersData, setFarmersData] = useState([]);
 
 
     useEffect(() => {
-        setFarmersData(getFarmersData());
+        getFarmersData();
     }, []);
+
 
 
     const getFarmersData = async () => {
@@ -24,11 +25,12 @@ const HomeScreen = () => {
         
         console.log("response");
         console.log(response.data);
-        return response.data;
+        setFarmersData(response.data);
     }
 
     const openFarmerScreen = (id) => {
         console.log("Opening farmer screen with id: ", id);
+        navigation.navigate('Farmer',{farm_id:id});
     }
 
     const OpenMap = () => {
@@ -44,18 +46,11 @@ const HomeScreen = () => {
                     <Text style={styles.map_button} onPress={OpenMap}>Map</Text>
                 </View>
                 <View style={styles.farmer_cards_container}>
-                    {/*FarmersData?.map((farmer, index) => {
+                    {FarmersData?.map((farmer, index) => {
                         return (
                             <FarmerCard onPress={()=>openFarmerScreen(index)} title={farmer.name} description={farmer.description}/>
                         );
-                    })*/}
-
-                    <FarmerCard onPress={()=>openFarmerScreen(0)} title={"Ferma Lui Marian"} description="Suntem o afacere familială dedicată cultivării și vânzării de legume proaspete și sănătoase pentru comunitatea noastră locală. Situată în inima peisajului rural, ferma noastră se ..."/>
-                    <FarmerCard onPress={()=>openFarmerScreen(0)} title={"Ferma Lui Marian"} description="Suntem o afacere familială dedicată cultivării și vânzării de legume proaspete și sănătoase pentru comunitatea noastră locală. Situată în inima peisajului rural, ferma noastră se ..."/>
-                    <FarmerCard onPress={()=>openFarmerScreen(0)} title={"Ferma Lui Marian"} description="Suntem o afacere familială dedicată cultivării și vânzării de legume proaspete și sănătoase pentru comunitatea noastră locală. Situată în inima peisajului rural, ferma noastră se ..."/>
-                    <FarmerCard onPress={()=>openFarmerScreen(0)} title={"Ferma Lui Marian"} description="Suntem o afacere familială dedicată cultivării și vânzării de legume proaspete și sănătoase pentru comunitatea noastră locală. Situată în inima peisajului rural, ferma noastră se ..."/>
-                    <FarmerCard onPress={()=>openFarmerScreen(0)} title={"Ferma Lui Marian"} description="Suntem o afacere familială dedicată cultivării și vânzării de legume proaspete și sănătoase pentru comunitatea noastră locală. Situată în inima peisajului rural, ferma noastră se ..."/>
-                
+                    })}
                 </View>
             </View>
         </ScrollView>

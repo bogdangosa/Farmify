@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.background2,
         paddingVertical: 10,
         paddingHorizontal: 20,
-        borderRadius: 25,
+        borderRadius: 15,
         justifyContent: "flex-start",
         alignItems: "flex-start",
         width: "100%",
