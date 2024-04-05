@@ -4,6 +4,7 @@ import { COLORS } from '../constants/colors';
 import { createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../firebaseConfig';
 import SimpleButton from '../components/Buttons/SimpleButton';
+import InputField from '../components/FormElements/InputField';
 
 const SignUpScreen = ({navigation}) => {
     const [Name, setName] = useState('');
@@ -31,41 +32,49 @@ const SignUpScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.top_bar_buttons}>
-                <Text style={styles.top_bar_buttons_text}>Login</Text>
-                <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]} onPress={()=> navigation.navigate('Login')}>Sign up</Text>
+                <Text style={styles.top_bar_buttons_text} onPress={()=> navigation.navigate('Login')}>Login</Text>
+                <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]}>Sign up</Text>
             </View>
-            <TextInput
+            <InputField
+                label={"Name"}
                 style={styles.input}
-                placeholder="Name"
+                placeholder="Your name"
                 onChangeText={setName}
                 value={Name}
             />
-            <TextInput
+            <InputField
+                label={"Email"}
                 style={styles.input}
-                placeholder="Email"
+                placeholder="Your email"
                 onChangeText={setEmail}
                 value={Email}
             />
-            <TextInput
+            <InputField
+                label={"Password"}
                 style={styles.input}
-                placeholder="Password"
+                placeholder="Your Password"
                 secureTextEntry
                 onChangeText={setPassword}
                 value={Password}
             />
             <SimpleButton title="Sign Up" onPress={handleSignup} />
+            <Text style={styles.forgot_password_text}>You already have an account? <Text style={styles.forgot_password_text_highlight} onPress={()=>navigation.navigate("Login")}>login</Text></Text>  
+        
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     top_bar_buttons_text: {
-        fontSize: 16,
+        fontSize: 22,
+        fontFamily:'Nunito_700Bold'
     
     },
     top_bar_buttons: {
+        width: '100%',
+        marginBottom: 20,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         gap: 20,
     },
     container: {
@@ -73,15 +82,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
+        gap: 16,
+        backgroundColor: COLORS.background
     },
     input: {
         width: '100%',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 12,
-        paddingHorizontal: 8,
     },
+    forgot_password_text: {
+        fontSize: 16,
+        fontFamily:'Nunito_400Regular'
+    },
+    forgot_password_text_highlight: {
+        color: COLORS.accent,
+        fontFamily:'Nunito_700Bold'
+    }
 });
 
 export default SignUpScreen;

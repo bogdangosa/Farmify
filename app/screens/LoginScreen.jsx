@@ -4,6 +4,7 @@ import SimpleButton from '../components/Buttons/SimpleButton';
 import { COLORS } from '../constants/colors';
 import { FIREBASE_AUTH } from '../../firebaseConfig';
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import InputField from '../components/FormElements/InputField';
 
 const LoginScreen = ({navigation}) => {
     const [Email, setEmail] = useState('');
@@ -47,14 +48,16 @@ const LoginScreen = ({navigation}) => {
                 <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]}>Login</Text>
                 <Text style={styles.top_bar_buttons_text} onPress={()=> navigation.navigate('SignUp')}>Sign up</Text>
             </View>
-            <TextInput
+            <InputField
                 style={styles.input}
-                placeholder="Email"
+                placeholder="your Email"
+                label={"Email"}
                 value={Email}
                 onChangeText={setEmail}
             />
-            <TextInput
+            <InputField
                 style={styles.input}
+                label={"Password"}
                 placeholder="Password"
                 secureTextEntry
                 value={Password}
@@ -69,7 +72,7 @@ const LoginScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     top_bar_buttons_text: {
-        fontSize: 16,
+        fontSize: 22,
         fontFamily:'Nunito_700Bold'
     
     },
@@ -85,17 +88,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
+        gap: 16,
+        backgroundColor: COLORS.background
     },
     input: {
         width: '100%',
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 12,
-        paddingHorizontal: 8,
     },
     forgot_password_text: {
-        marginTop: 16,
         fontSize: 16,
         fontFamily:'Nunito_400Regular'
     },
