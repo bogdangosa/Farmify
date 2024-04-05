@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase
 import { FIREBASE_AUTH } from '../../firebaseConfig';
 import SimpleButton from '../components/Buttons/SimpleButton';
 import InputField from '../components/FormElements/InputField';
+import { useUserUpdateContext } from '../contexts/UserContext';
 
 const SignUpScreen = ({navigation}) => {
     const [Name, setName] = useState('');
@@ -12,13 +13,22 @@ const SignUpScreen = ({navigation}) => {
     const [Password, setPassword] = useState('');
     const [Loading, setLoading] = useState(false);
     const [ErrorText, setErrorText] = useState('');
-    const auth = FIREBASE_AUTH;;
+    const auth = FIREBASE_AUTH;
+    const updateUser = useUserUpdateContext();
 
     const handleSignup = () => {
         setLoading(true);
         console.log(Email,Password);
         const response = createUserWithEmailAndPassword(auth,Email,Password  ).then(async(userCredential) => {
             console.log(userCredential);
+            let response = await updateUser({
+                "command":"add_user_to_database",
+                "data": {
+                  "name":Name,
+                    "email":Email,
+                    "uid":userCredential.user.uid
+                }
+              });
             setLoading(false);
 
         }).catch((error) => {
