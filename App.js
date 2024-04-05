@@ -1,19 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import AppLayout from "./AppLayout";
+import { UserProvider } from "./app/contexts/UserContext";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      
-    </View>
+    <UserProvider>
+      <AppLayout />
+    </UserProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
