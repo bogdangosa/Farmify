@@ -4,6 +4,7 @@ import FarmerCard from "../components/Cards/FarmerCard";
 import { ScrollView } from 'react-native-gesture-handler';
 import { COLORS } from '../constants/colors';
 import axios from 'axios';
+import NoSubscriptionCard from '../components/Cards/NoSubscriptionCard';
 
 const HomeScreen = () => {
     const [FarmersData, setFarmersData] = useState([]);
@@ -37,6 +38,7 @@ const HomeScreen = () => {
     return (
         <ScrollView>
             <View style={styles.container}>
+                <NoSubscriptionCard></NoSubscriptionCard>
                 <View style={styles.farmer_view_top_container}>
                     <Text style={styles.title}>See local farmers</Text>
                     <Text style={styles.map_button} onPress={OpenMap}>Map</Text>

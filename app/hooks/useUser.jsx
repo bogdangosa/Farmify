@@ -17,7 +17,15 @@ const useUser = () => {
     },[]); 
 
     const AddUserToDatabase = async (data) =>{
-
+        const response = await axios.post(
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/add_user`,
+            {"id": data.uid, "is_farmer": false, "name": data.name, "email": data.email}
+            
+        ).catch((error) => {
+            console.log("error");
+            console.log(error);
+        });
+        console.log(response);
     }
 
     const getUserData = async (user) =>{
