@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import FarmerCard from "../components/Cards/FarmerCard";
 
 const HomeScreen = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Welcome to Farmify!</Text>
-            {/* Add your content here */}
+            <FarmerCard title={"Ferma Lui Marian"}/>
         </View>
     );
 };

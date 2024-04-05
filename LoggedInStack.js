@@ -7,7 +7,7 @@ function LoggedInStack() {
   const Drawer = createDrawerNavigator();
 
   return (
-    <Drawer.Navigator drawerStyle={styles.custom_drawer} initialRouteName="Home">
+    <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="Home" component={HomeScreen}></Drawer.Screen>
       <Drawer.Screen name="Account" component={AccountScreen}></Drawer.Screen>
     </Drawer.Navigator>

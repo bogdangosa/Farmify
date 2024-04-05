@@ -5,7 +5,7 @@ import AuthentificationStack from './AuthentificationStack';
 import LoggedInStack from './LoggedInStack';
 
 const AppLayout = () => {
-    const user = undefined;
+    const user = "smth";
 
     return (
         <NavigationContainer>
