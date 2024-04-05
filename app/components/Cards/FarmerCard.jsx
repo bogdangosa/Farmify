@@ -1,5 +1,4 @@
 import {Pressable, StyleSheet, Text, View} from "react-native";
-import LoggedInStack from "../../../LoggedInStack";
 import {COLORS} from "../../constants/colors";
 
 const FarmerCard = ({title,description,onPress}) => {
