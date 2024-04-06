@@ -6,7 +6,7 @@ import CarrotSvg from '../../../assets/carrot.svg';
 import farmtest from '../../../assets/farmtest.jpg'
 import { useWindowDimensions } from 'react-native';
 
-const FarmImageCard = () => {
+const FarmImageCard = ({farm_name}) => {
 
     const { height, width } = useWindowDimensions();
 
@@ -18,7 +18,7 @@ const FarmImageCard = () => {
                 style={styles.image}
                 resizeMode="cover"
             />
-            <Text style={styles.text}>TemplateFarmName</Text>
+            <Text style={styles.text}>{farm_name}</Text>
                 <View style={styles.containerBackground}>
 
                 </View>

@@ -101,7 +101,19 @@ const FarmManagerHome = ({navigation}) => {
     }
 
     const editProduce = async (stock,price) => {
+        const response = await axios.post(
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/update_produce`,
+            {"id": ProducesData[OpenedEditProduce]?.id,"stock":stock,"price":price}
+        ).catch((error) => {
+            console.log("error");
+            console.log(error);
+        });
+        console.log(response.data);
         
+        if(response.data.code == "0"){
+            setOpenedEditProduce(undefined);
+            getProduceData(FarmData[0].id);
+        }
     }
 
     return (
@@ -118,14 +130,14 @@ const FarmManagerHome = ({navigation}) => {
                 </View>
                 <View style={styles.produces_container}>
                 {ProducesData!=undefined && ProducesData.length>0 ?ProducesData?.map((produce, index) => {
-                    return <ProduceCardExtended onPress={()=>setOpenedEditProduce(index)} onDelete={()=>deleteProduce(produce.id)} key={index} title={produce.produce} stock={produce.stock}></ProduceCardExtended>
+                    return <ProduceCardExtended onPress={()=>setOpenedEditProduce(index)} onDelete={()=>deleteProduce(produce.id)} key={index} title={produce.produce} stock={produce.stock} price={produce.price}></ProduceCardExtended>
                 }):
                 <Text style={styles.no_produce_text}>Nu ai niciun produs, <Text style={styles.highlighted} onPress={()=>setAddProduceModalState(true)}>adauga!</Text></Text>}
                 </View>
                 
                 
                 <AddProduceModal isVisible={AddProduceModalState} onClose={()=>setAddProduceModalState(false)} addProduce={(name,stock,price)=>addProduce(name,stock,price)}></AddProduceModal>
-                <EditProduceModal initial_produce_data={{stock:ProducesData[OpenedEditProduce]?.stock,price:ProducesData[OpenedEditProduce]?.price}} editProduce={(stock,price)=>editProduce(stock,price)} isVisible={OpenedEditProduce!=undefined} onClose={()=>setOpenedEditProduce(undefined)}></EditProduceModal>
+                <EditProduceModal produce_name={ProducesData[OpenedEditProduce]?.produce} initial_produce_data={{stock:ProducesData[OpenedEditProduce]?.stock,price:ProducesData[OpenedEditProduce]?.price}} editProduce={(stock,price)=>editProduce(stock,price)} isVisible={OpenedEditProduce!=undefined} onClose={()=>setOpenedEditProduce(undefined)}></EditProduceModal>
             </View>
         </ScrollView>
     );

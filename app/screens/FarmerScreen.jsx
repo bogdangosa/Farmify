@@ -11,6 +11,7 @@ import {COLORS} from "../constants/colors";
 const FarmerScreen = ({route}) => {
     console.log("Route object:", route);
     const [ProducesData,setProducesData] = useState([]);
+    const [FarmData,setFarmData] = useState([]);
 
     const {farm_id} = route.params
     useEffect(()=>{
@@ -18,8 +19,21 @@ const FarmerScreen = ({route}) => {
             return
         }
         console.log(farm_id)
+        getFarmData(farm_id);
         getProduceData(farm_id);
     },[farm_id])
+
+    const getFarmData = async (farm_id) => {
+        const response = await axios.post(
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/get_farm`,{id:farm_id}).catch((error) => {
+                console.log("error here");
+                console.log(error);
+            });
+        
+        console.log("response");
+        console.log(response.data);
+        setFarmData(response.data);
+    }
 
     const getProduceData = async(farm_id) => {
         console.log(farm_id)
@@ -40,7 +54,7 @@ const FarmerScreen = ({route}) => {
     return (
         <View>
         <View style={styles.container}>
-            <FarmImageCard></FarmImageCard>
+            <FarmImageCard farm_name={FarmData?.name}></FarmImageCard>
             <FlatList
                 data={ProducesData}
                 numColumns={3}

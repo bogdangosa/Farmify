@@ -9,7 +9,7 @@ import { Drawer } from 'react-native-ui-lib';
 import { ProduceSvg } from '../../utils/ProduceSvg';
 
 
-const ProduceCardExtended = ({ title, stock,style,onPress,onDelete}) => {
+const ProduceCardExtended = ({ title, stock,price,style,onPress,onDelete}) => {
     return (
         <Drawer 
         onFullSwipeLeft={true}
@@ -19,7 +19,7 @@ const ProduceCardExtended = ({ title, stock,style,onPress,onDelete}) => {
             <DefaultContainer onPress={onPress} style={{backgroundColor:COLORS.background2}}>
                 <SquaredSvgButton color={"#DDDDDD"}><ProduceSvg produce={title} height="32" width="32"></ProduceSvg></SquaredSvgButton>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.stock}>{stock}<Text style={styles.type}>kg</Text></Text>
+                <Text style={styles.stock}>{stock}<Text style={styles.type}>kg</Text> | {price}<Text style={styles.type}>lei/kg</Text> </Text>
             </DefaultContainer>
         </Drawer>
     );
