@@ -23,7 +23,6 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
         userUpdate({command: "start_membership", subscription_type: "basic"}); 
     }
 
->>>>>>> 153d46c0b3bc12c23aa6a435f67e7f780358a9a5
     useEffect(() => {
         console.log("VideoModal is visible: ", isVisible);
     }, [isVisible]);

@@ -13,12 +13,14 @@ import ProduceCardExtended from '../components/Cards/ProduceCardExtended';
 import { Dialog } from 'react-native-ui-lib/src/incubator';
 import { PanningProvider } from 'react-native-ui-lib';
 import InputField from '../components/FormElements/InputField';
+import EditProduceModal from '../Modals/EditProduceModal';
 
 const FarmManagerHome = ({navigation}) => {
     const [FarmData, setFarmData] = useState([]);
     const [ProducesData, setProducesData] = useState([]);
     const [Refreshing, setRefreshing] = React.useState(false);
     const [AddProduceModalState,setAddProduceModalState] = useState(false);
+    const [OpenedEditProduce,setOpenedEditProduce] = useState(undefined);
     const user = useUserContext();
     const [ProduceName, setProduceName] = useState('');
 
@@ -95,8 +97,10 @@ const FarmManagerHome = ({navigation}) => {
         else{
             setAddProduceModalState(false);
         }
+        
+    }
 
-
+    const editProduce = async (stock,price) => {
         
     }
 
@@ -114,14 +118,14 @@ const FarmManagerHome = ({navigation}) => {
                 </View>
                 <View style={styles.produces_container}>
                 {ProducesData!=undefined && ProducesData.length>0 ?ProducesData?.map((produce, index) => {
-                    return <ProduceCardExtended onDelete={()=>deleteProduce(produce.id)} key={index} title={produce.produce} stock={produce.stock}></ProduceCardExtended>
+                    return <ProduceCardExtended onPress={()=>setOpenedEditProduce(index)} onDelete={()=>deleteProduce(produce.id)} key={index} title={produce.produce} stock={produce.stock}></ProduceCardExtended>
                 }):
                 <Text style={styles.no_produce_text}>Nu ai niciun produs, <Text style={styles.highlighted} onPress={()=>setAddProduceModalState(true)}>adauga!</Text></Text>}
                 </View>
                 
                 
                 <AddProduceModal isVisible={AddProduceModalState} onClose={()=>setAddProduceModalState(false)} addProduce={(name,stock,price)=>addProduce(name,stock,price)}></AddProduceModal>
-            
+                <EditProduceModal initial_produce_data={{stock:ProducesData[OpenedEditProduce]?.stock,price:ProducesData[OpenedEditProduce]?.price}} editProduce={(stock,price)=>editProduce(stock,price)} isVisible={OpenedEditProduce!=undefined} onClose={()=>setOpenedEditProduce(undefined)}></EditProduceModal>
             </View>
         </ScrollView>
     );
@@ -166,6 +170,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontFamily: 'Nunito_700Bold',
+        color: COLORS.primary,
         marginBottom: 16,
     },
     farmer_view_top_container: {

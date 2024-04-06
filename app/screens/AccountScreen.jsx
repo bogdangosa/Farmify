@@ -33,7 +33,22 @@ const AccountScreen = () => {
 
     return (
         <View style={styles.container}>
-            {!user.is_farmer?<BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard>:<></>}
+            {!user.is_farmer?<BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard>:
+            <>
+                <InputField
+                    label={"Numele fermei"}
+                    style={styles.input}
+                    placeholder="Numele fermei tale"
+                    onChangeText={setFarmName}
+                    value={FarmName}></InputField>    
+                <InputField 
+                    label="Descrierea fermei" 
+                    placeholder="Descrierea fermei tale" 
+                    value={FarmDescription}
+                    multiline={true}
+                    styles={{ height:200, textAlignVertical: 'top',}}
+                    onChangeText={setFarmDescription}></InputField>        
+            </>}
             <InputField
                 label={"Nume"}
                 style={styles.input}
@@ -66,6 +81,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         padding: 16,
+        gap: 16,
     },
     title: {
         fontSize: 24,
