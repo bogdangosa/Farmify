@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text ,StyleSheet} from 'react-native';
 import SimpleButton from '../components/Buttons/SimpleButton';
 import { FIREBASE_AUTH } from '../../firebaseConfig';
 import { useUserContext } from '../contexts/UserContext';
 import InputField from '../components/FormElements/InputField';
 import BecomeAFarmerCard from '../components/Cards/BecomeAFarmerCard';
+import BecomeFarmerModal from '../Modals/BecomeFarmerModal';
 
 const AccountScreen = () => {
     const [Name,setName] = useState('');
+    const [BecomeAFarmerModalState,setBecomeAFarmerModalState] = useState(false);
     const user = useUserContext();
+
+    useEffect(() => {
+        if(user!=undefined){
+            setName(user.name);
+        }
+    }, [user]);
 
     const SignOut = ()=>{
         console.log("Signing out");
@@ -17,15 +25,18 @@ const AccountScreen = () => {
 
     return (
         <View style={styles.container}>
-            <BecomeAFarmerCard></BecomeAFarmerCard> 
+            <BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard> 
 
             <InputField
-                label={"Name"}
+                label={"Nume"}
                 style={styles.input}
-                placeholder="Your name"
+                placeholder="Numele tau"
                 onChangeText={setName}
                 value={Name}></InputField>
             <SimpleButton style={styles.sign_out_button} onPress={()=>SignOut()} title="Sign out"></SimpleButton>
+        
+            <BecomeFarmerModal isVisible={BecomeAFarmerModalState}onClose={()=>setBecomeAFarmerModalState(false)}></BecomeFarmerModal>
+     
         </View>
     );
 };

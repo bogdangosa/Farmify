@@ -5,28 +5,26 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { COLORS } from '../constants/colors';
 import axios from 'axios';
 import NoSubscriptionCard from '../components/Cards/NoSubscriptionCard';
+import SquaredButton from '../components/Buttons/SquaredButton';
+import CurrentOrdersCard from '../components/Cards/CurrentOrdersCard';
 
-const HomeScreen = ({navigation}) => {
-    const [FarmersData, setFarmersData] = useState([]);
+const FarmManagerHome = ({navigation}) => {
+    const [FarmData, setFarmData] = useState([]);
     const [Refreshing, setRefreshing] = React.useState(false);
+    const [AddProduceModalState,setAddProduceModalState] = useState(false);
 
     const onRefresh = React.useCallback(() => {
       setRefreshing(true);
-      getFarmersData();
       setTimeout(() => {
         setRefreshing(false);
       }, 2000);
     }, []);
-
-
     useEffect(() => {
-        getFarmersData();
+        getFarmData();
     }, []);
 
-
-
-    const getFarmersData = async () => {
-        const response = await axios.get(
+    const getFarmData = async () => {
+        /*const response = await axios.get(
             `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/get_all_farms`).catch((error) => {
                 console.log("error");
                 console.log(error);
@@ -34,17 +32,10 @@ const HomeScreen = ({navigation}) => {
         
         console.log("response");
         console.log(response.data);
-        setFarmersData(response.data);
+        setFarmData(response.data);*/
     }
 
-    const openFarmerScreen = (id) => {
-        console.log("Opening farmer screen with id: ", id);
-        navigation.navigate('Farmer',{farm_id:id});
-    }
 
-    const OpenMap = () => {
-        console.log("Opening map");
-    }
 
     return (
         <ScrollView
@@ -52,18 +43,13 @@ const HomeScreen = ({navigation}) => {
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh} />
         }>
             <View style={styles.container}>
-                <NoSubscriptionCard></NoSubscriptionCard>
-                <View style={styles.farmer_view_top_container}>
-                    <Text style={styles.title}>See local farmers</Text>
-                    <Text style={styles.map_button} onPress={OpenMap}>Map</Text>
+                <CurrentOrdersCard number_of_orders={2}></CurrentOrdersCard>
+
+                <View style={[styles.inline,{marginTop:16}]}>
+                    <Text style={styles.title}>Produsele tale</Text>
+                    <SquaredButton onPress={()=>setAddProduceModalState(true)} title="adauga"></SquaredButton>
                 </View>
-                <View style={styles.farmer_cards_container}>
-                    {FarmersData?.map((farmer, index) => {
-                        return (
-                            <FarmerCard key={index} onPress={()=>openFarmerScreen(farmer.id)} title={farmer.name} description={farmer.description}/>
-                        );
-                    })}
-                </View>
+
             </View>
         </ScrollView>
     );
@@ -73,6 +59,13 @@ const styles = StyleSheet.create({
     farmer_cards_container: {
         width: "100%",
         gap: 16,
+    },
+    inline: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        paddingHorizontal: 16,
     },
     container: {
         padding: 10,
@@ -101,4 +94,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HomeScreen;
+export default FarmManagerHome;

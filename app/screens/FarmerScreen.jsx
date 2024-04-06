@@ -75,7 +75,10 @@ const styles = StyleSheet.create({
         gap: 20,
     },
     containerImage:{
-       position:"absolute"
+       position:"absolute",
+        paddingHorizontal: 10,
+        gap: 20
+
     }
 
 });

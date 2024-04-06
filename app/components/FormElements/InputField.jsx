@@ -2,7 +2,7 @@ import React from 'react';
 import { TextInput , StyleSheet,View,Text} from 'react-native';
 import { COLORS } from '../../constants/colors';
 
-const InputField = ({value,label,onChangeText,placeholder,styles}) => {
+const InputField = ({value,label,onChangeText,placeholder,styles,multiline}) => {
     return (
         <View style={input_styles.input_field_container}>
             <Text style={input_styles.label}>{label}</Text>
@@ -11,6 +11,8 @@ const InputField = ({value,label,onChangeText,placeholder,styles}) => {
                 placeholderTextColor="#AAAAAA"
                 style={[input_styles.input,styles]}
                 value={value}
+                multiline={multiline}
+                numberOfLines={multiline?4:1}
                 onChangeText={onChangeText}
             />
         </View>
