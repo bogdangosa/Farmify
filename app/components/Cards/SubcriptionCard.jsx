@@ -1,15 +1,15 @@
 import {Image, Pressable, StyleSheet, Text, View} from "react-native";
 import {COLORS} from "../../constants/colors";
 import {LinearGradient} from 'expo-linear-gradient';
-const BasicSubscribedCardSimple=()=>{
+const BasicSubscribedCardSimple=({color1, color2, textTitle, textDescription, textPrice})=>{
 
     return(
         <LinearGradient
-            colors={[COLORS.accent, COLORS.accent2] }
+            colors={[color1, color2] }
             style={styles.containerGradient}>
-            <Text style={styles.TextTitle}>Basic</Text>
-            <Text style={styles.textDescription}>{'Hello\nHello\nHello'}</Text>
-            <Text style={styles.textPrice}>20 Lei/Month</Text>
+            <Text style={styles.TextTitle}>{textTitle}</Text>
+            <Text style={styles.textDescription}>{textDescription}</Text>
+            <Text style={styles.textPrice}>{textPrice}</Text>
         </LinearGradient>
     )
 };
