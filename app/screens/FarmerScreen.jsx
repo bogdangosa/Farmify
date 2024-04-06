@@ -59,7 +59,7 @@ const FarmerScreen = ({route}) => {
 
             </FlatList>
         </View>
-            <Text style={styles.textContainer}>My Produce</Text>
+            <Text style={styles.textContainer}>Produsele fermei</Text>
         </View>
     );
 };
