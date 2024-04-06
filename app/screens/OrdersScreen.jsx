@@ -5,7 +5,7 @@ import OrderCards from "../components/Cards/OrderCards";
 
 const OrdersScreen = () => {
     return (
-        <View>
+        <View style={styles.mainContainer}>
             <Text style={styles.title}>Orders Screen</Text>
             <OrderCards></OrderCards>
         </View>
@@ -17,8 +17,13 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: "Nunito_700Bold",
         fontSize:25,
-        color:COLORS.primary
+        color:COLORS.primary,
+        marginVertical:20,
     },
+    mainContainer:{
+        justifyContent: "center",
+        alignItems: "center"
+    }
 });
 
 
