@@ -8,6 +8,7 @@ export const COLORS = {
     extraAccent1: "#4c669f",
     extraAccent2: "#192f6a",
     premiumAccent1:"#ccb100",
-    premiumAccent2: '#FFD700'
+    premiumAccent2: '#FFD700',
+    complete: "#31EC7C",
 
 }

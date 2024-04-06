@@ -7,10 +7,16 @@ import BecomeAFarmerCard from '../components/Cards/BecomeAFarmerCard';
 import { useUserContext, useUserUpdateContext } from '../contexts/UserContext';
 import axios from 'axios';
 import useUser from '../hooks/useUser';
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import { FIREBASE_AUTH, FIREBASE_STORRAGE } from '../../firebaseConfig';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 const BecomeFarmerModal = ({  isVisible, onClose }) => {
     const [FarmName, setFarmName] = useState('');
     const [FarmDescription, setFarmDescription] = useState('');
+    const [FarmImage,setFarmImage] = useState(undefined);
+    const [FarmImageLink,setFarmImageLink] = useState(undefined);
     const user = useUserContext();
     const userUpdate = useUserUpdateContext();
 
@@ -18,12 +24,47 @@ const BecomeFarmerModal = ({  isVisible, onClose }) => {
         console.log("VideoModal is visible: ", isVisible);
     }, [isVisible]);
 
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        if(!result.canceled){
+            setFarmImage(result.assets[0].uri);
+            await uploadImage(result.assets[0].uri,"image");
+        }
+
+
+        console.log(result);
+
+    }
+
+    const uploadImage = async (uri,image_type)=>{
+        const response = await fetch(uri);
+        const blob = await response.blob();
+        const storrageRef = ref(FIREBASE_STORRAGE,"FarmImages/"+ new Date().getTime());
+        const uploadTask = uploadBytesResumable(storrageRef,blob)
+        uploadTask.on("state_changed",(snapshot)=>{
+            console.log(snapshot.bytesTransferred/snapshot.totalBytes);
+        },(error)=>console.log(error),()=>{
+            getDownloadURL(uploadTask.snapshot.ref).then(async (download_url)=>{
+                console.log(download_url);
+                setFarmImageLink(download_url);
+            })
+        })
+         
+    }
+
     const becomeAFarmer = async () => {
         console.log(user);
+        console.log(FarmImageLink);
         console.log("Becoming a farmer with name: ", FarmName, " and description: ", FarmDescription,"user:",user.uid);
         const response = await axios.post(
             `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/add_farm`,
-            {"owner": user.uid, "name": FarmName, "description": FarmDescription, "latitude": 0, "longitude": 0}
+            {"owner": user.uid, "name": FarmName, "description": FarmDescription,"image":FarmImageLink, "latitude": 0, "longitude": 0}
             ).catch((error) => {
             console.log("error");
             console.log(error);
@@ -52,6 +93,9 @@ const BecomeFarmerModal = ({  isVisible, onClose }) => {
                     multiline={true}
                     styles={{ height:200, textAlignVertical: 'top',}}
                     onChangeText={setFarmDescription}></InputField>
+                <SquaredButton style={styles.add_image_button} title="Adauga imagine" onPress={()=>pickImage()}></SquaredButton>
+                    
+
                 <View style={styles.save_exit_buttons_container}>
                     <SquaredButton onPress={()=>onClose()} style={{backgroundColor:COLORS.secondary}} title="anuleaza"></SquaredButton>
                     <SquaredButton onPress={()=>becomeAFarmer()} title="continua"></SquaredButton>

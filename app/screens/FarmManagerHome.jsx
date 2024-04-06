@@ -122,7 +122,7 @@ const FarmManagerHome = ({navigation}) => {
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh} />
         }>
             <View style={styles.container}>
-                <CurrentOrdersCard onPress={()=>navigation.navigate("Orders")} number_of_orders={FarmData[0]?.orders}></CurrentOrdersCard>
+                <CurrentOrdersCard onPress={()=>navigation.navigate("Orders",{farm_id:FarmData[0].id})} number_of_orders={FarmData[0]?.orders}></CurrentOrdersCard>
 
                 <View style={[styles.inline,{marginTop:16}]}>
                     <Text style={styles.title}>Produsele tale</Text>
