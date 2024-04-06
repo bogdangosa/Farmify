@@ -7,12 +7,15 @@ import axios from "axios";
 import {log} from "expo/build/devtools/logger";
 import FarmImageCard from "../components/Cards/FarmImageCard";
 import {COLORS} from "../constants/colors";
+import AddOrderModal from "../Modals/AddOrderModal";
 
 const FarmerScreen = ({route}) => {
     console.log("Route object:", route);
     const [ProducesData,setProducesData] = useState([]);
-
     const {farm_id} = route.params
+    const [produceIndex, setProduceIndex] = useState(undefined)
+    const [isVisible, setIsVisible] = useState(false)
+
     useEffect(()=>{
         if (farm_id == undefined){
             return
@@ -37,6 +40,7 @@ const FarmerScreen = ({route}) => {
         console.log(data_array)
         setProducesData(data_array);
     }
+
     return (
         <View>
         <View style={styles.container}>
@@ -52,12 +56,13 @@ const FarmerScreen = ({route}) => {
                         console.log("here")
                         return (<ProduceCard style={{opacity: 0}} index={{index}}></ProduceCard>)
                     }
-                    return (<ProduceCard index={index} title={item.produce}/>);
+                    return (<ProduceCard onPress={()=>setProduceIndex(index)}  index={index} title={item.produce}/>);
                 }}
                 keyExtractor={(item) => item.id}
                 style={styles.grid_layout}>
 
             </FlatList>
+            <AddOrderModal data={ProducesData[produceIndex]} isVisible={produceIndex!=undefined} onClose={() =>setProduceIndex(undefined)}></AddOrderModal>
         </View>
             <Text style={styles.textContainer}>Produsele fermei</Text>
         </View>
