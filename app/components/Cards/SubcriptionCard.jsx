@@ -8,7 +8,9 @@ const BasicSubscribedCardSimple=({color1, color2, textTitle, textDescription, te
             colors={[color1, color2] }
             style={styles.containerGradient}>
             <Text style={styles.TextTitle}>{textTitle}</Text>
-            <Text style={styles.textDescription}>{textDescription}</Text>
+            <View style={styles.bulet_points_container}>
+                <Text style={styles.textDescription}>{textDescription}</Text>
+            </View>
             <Text style={styles.textPrice}>{textPrice}</Text>
         </LinearGradient>
     )
@@ -20,6 +22,9 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         width: "100%",
         borderRadius: 15,
+        position: "relative",
+        paddingLeft: 20,
+        paddingBottom: 20,
     },
     TextTitle:{
         width:'100%',
@@ -27,7 +32,6 @@ const styles = StyleSheet.create({
         fontFamily: "Nunito_700Bold",
         color:COLORS.background,
         padding: 10,
-        paddingLeft:20
     },
 
     textDescription:{
@@ -36,13 +40,15 @@ const styles = StyleSheet.create({
         fontFamily:"Nunito_400Regular",
         color: COLORS.background,
         paddingTop:5,
-        paddingLeft: 40,
     },
     textPrice:{
         fontSize:25,
         fontFamily: "Nunito_700Bold",
-        paddingLeft: 250,
-        color: COLORS.background
+        position: "absolute",
+        right: 20,
+        bottom: 20,
+        color: COLORS.background,
+
     }
 
 });

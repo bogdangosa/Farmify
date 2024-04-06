@@ -7,6 +7,7 @@ import axios from 'axios';
 import NoSubscriptionCard from '../components/Cards/NoSubscriptionCard';
 import SelectMembershipModal from '../Modals/SelectMembershipModal';
 import { useUserContext } from '../contexts/UserContext';
+import SubscriptionCardHome from '../components/Cards/SubscriptionCardHome';
 
 const HomeScreen = ({navigation}) => {
     const [FarmersData, setFarmersData] = useState([]);
@@ -57,7 +58,9 @@ const HomeScreen = ({navigation}) => {
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh} />
         }>
             <View style={styles.container}>
-                {user?.subscription_type=="none"?<NoSubscriptionCard onPress={()=>setOpenSubscriptionModalState(true)}></NoSubscriptionCard>:<></>}
+                {user?.subscription_type=="none"?<NoSubscriptionCard onPress={()=>setOpenSubscriptionModalState(true)}></NoSubscriptionCard>:(
+                    user?.subscription_type!=undefined?<SubscriptionCardHome subscription_type={user.subscription_type}></SubscriptionCardHome>:<></>
+                )}
                 <View style={styles.farmer_view_top_container}>
                     <Text style={styles.title}>See local farmers</Text>
                     <Text style={styles.map_button} onPress={OpenMap}>Map</Text>

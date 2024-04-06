@@ -25,7 +25,7 @@ const AccountScreen = () => {
 
     return (
         <View style={styles.container}>
-            <BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard>
+            {!user.is_farmer?<BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard>:<></>}
             <InputField
                 label={"Nume"}
                 style={styles.input}
