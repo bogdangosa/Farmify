@@ -36,11 +36,13 @@ const useUser = () => {
 
     const getUserData = async (user) =>{
         const response = await axios.post(
-            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/get_user_data`,{id:user.uid}).catch((error) => {
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/get_user`,{id:user.uid}).catch((error) => {
                 console.log("error");
                 console.log(error);
             });
+        console.log("user data");
         console.log(response.data);
+        setUser({...user,...response.data,});
     }
     const updateUser = async (data) => {
         //console.log(data);

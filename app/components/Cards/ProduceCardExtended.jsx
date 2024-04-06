@@ -4,14 +4,24 @@ import DefaultContainer from '../Containers/DefaultContainer';
 import { COLORS } from '../../constants/colors';
 import CarrotSvg from '../../../assets/carrot.svg';
 import SquaredSvgButton from './SquaredSvgButton';
+import { Swipeable } from 'react-native-gesture-handler';
+import { Drawer } from 'react-native-ui-lib';
+import { ProduceSvg } from '../../utils/ProduceSvg';
 
-const ProduceCardExtended = ({ title, stock,style,onPress}) => {
+
+const ProduceCardExtended = ({ title, stock,style,onPress,onDelete}) => {
     return (
-        <DefaultContainer onPress={onPress} style={{backgroundColor:COLORS.background2}}>
-            <SquaredSvgButton color={"#DDDDDD"}><CarrotSvg height="32" width="32"></CarrotSvg></SquaredSvgButton>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.stock}>{stock}<Text style={styles.type}>kg</Text></Text>
-        </DefaultContainer>
+        <Drawer 
+        onFullSwipeLeft={true}
+        onFullSwipeRight={true}
+        leftItem={{text: 'Delete', background: COLORS.accent,fontFamily:"Nunito_400Regular", onPress: () => onDelete()}}
+>
+            <DefaultContainer onPress={onPress} style={{backgroundColor:COLORS.background2}}>
+                <SquaredSvgButton color={"#DDDDDD"}><ProduceSvg produce={title} height="32" width="32"></ProduceSvg></SquaredSvgButton>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.stock}>{stock}<Text style={styles.type}>kg</Text></Text>
+            </DefaultContainer>
+        </Drawer>
     );
 };
 

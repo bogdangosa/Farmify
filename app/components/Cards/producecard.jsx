@@ -1,11 +1,12 @@
 import CartofSvg from "../../../assets/cartof.svg"
 import {Pressable, StyleSheet, Text, View} from "react-native";
 import {COLORS} from "../../constants/colors";
+import { ProduceSvg } from "../../utils/ProduceSvg";
 
 const ProduceCard = ({title,onPress,style}) => {
     return (
         <Pressable onPress={onPress} style={[styles.card,style]}>
-           <CartofSvg height="50" width="50"/>
+           <ProduceSvg produce={title} height={48} width={48}/>
             <Text style={styles.textstyle}>{title}</Text>
         </Pressable>
     );
