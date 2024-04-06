@@ -6,6 +6,7 @@ import ProduceCard from "../components/Cards/producecard";
 import axios from "axios";
 import {log} from "expo/build/devtools/logger";
 import FarmImageCard from "../components/Cards/FarmImageCard";
+import {COLORS} from "../constants/colors";
 
 const FarmerScreen = ({route}) => {
     console.log("Route object:", route);
@@ -37,7 +38,7 @@ const FarmerScreen = ({route}) => {
         setProducesData(data_array);
     }
     return (
-
+        <View>
         <View style={styles.container}>
             <FarmImageCard></FarmImageCard>
             <FlatList
@@ -57,7 +58,8 @@ const FarmerScreen = ({route}) => {
                 style={styles.grid_layout}>
 
             </FlatList>
-
+        </View>
+            <Text style={styles.textContainer}>My Produce</Text>
         </View>
     );
 };
@@ -66,10 +68,12 @@ const styles = StyleSheet.create({
         gap:8,
     },
     container:{
+        position:'relative',
         flexDirection: "row",
         flexWrap: 'wrap',
+        overflow:"visible",
+        width:'100%',
         justifyContent: "space-between",
-        margin: 20,
         paddingVertical: 20,
         paddingHorizontal: 20,
         gap: 20,
@@ -78,7 +82,14 @@ const styles = StyleSheet.create({
        position:"absolute",
         paddingHorizontal: 10,
         gap: 20
-
+    },
+    textContainer:{
+        position:"absolute",
+        paddingTop:200, //change this to move my produce
+        paddingHorizontal: 20,
+        fontFamily: "Nunito_700Bold",
+        fontSize:25,
+        color: COLORS.primary
     }
 
 });
