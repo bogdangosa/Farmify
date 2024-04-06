@@ -4,18 +4,31 @@ import SquaredButton from '../components/Buttons/SquaredButton';
 import InputField from '../components/FormElements/InputField';
 import { COLORS } from '../constants/colors';
 import BecomeAFarmerCard from '../components/Cards/BecomeAFarmerCard';
+import { useUserContext } from '../contexts/UserContext';
+import axios from 'axios';
 
 const BecomeFarmerModal = ({  isVisible, onClose }) => {
     const [FarmName, setFarmName] = useState('');
     const [FarmDescription, setFarmDescription] = useState('');
+    const user = useUserContext();
 
     useEffect(() => {
         console.log("VideoModal is visible: ", isVisible);
     }, [isVisible]);
 
-    const becomeAFarmer = () => {
+    const becomeAFarmer = async () => {
         console.log("Becoming a farmer with name: ", FarmName, " and description: ", FarmDescription);
-        onClose();
+        const response = await axios.post(
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/add_farm`,
+            {"owner": user.uid, "name": FarmName, "description": FarmDescription, "latitude": 0, "longitude": 0}
+            ).catch((error) => {
+            console.log("error");
+            console.log(error);
+        });
+        console.log(response.data);
+        if(response.data.code == "0")
+            onClose();
+
     }
 
     return (
@@ -24,12 +37,12 @@ const BecomeFarmerModal = ({  isVisible, onClose }) => {
                 <Text style={styles.modal_title}>Become a farmer</Text>
                 <InputField 
                     label="Numele fermei" 
-                    placeholder="numele fermei tale" 
+                    placeholder="Numele fermei tale" 
                     value={FarmName}
                     onChangeText={setFarmName}></InputField>
                 <InputField 
                     label="Descrierea fermei" 
-                    placeholder="descrierea fermei tale" 
+                    placeholder="Descrierea fermei tale" 
                     value={FarmDescription}
                     multiline={true}
                     styles={{ height:200, textAlignVertical: 'top',}}

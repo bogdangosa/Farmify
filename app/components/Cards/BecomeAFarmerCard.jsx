@@ -3,42 +3,25 @@ import { View, Text, Pressable } from 'react-native';
 import { COLORS } from '../../constants/colors';
 import SquaredSvgButton from './SquaredSvgButton';
 import CarrotSvg from '../../../assets/carrot.svg';
+import DefaultContainer from '../Containers/DefaultContainer';
 
 const BecomeAFarmerCard = ({onPress}) => {
 
     return (
-        <Pressable onPress={onPress} style={styles.container}>
-            <View style={styles.card}>
+        <DefaultContainer onPress={onPress}>
                 <SquaredSvgButton color={COLORS.accent2}><CarrotSvg height="32" width="32"></CarrotSvg></SquaredSvgButton>
                 <View style={styles.text_container}>
                     
-                <Text style={styles.title}>Become a farmer!</Text>
-                <Text style={styles.text}>Enter your details here</Text>
+                <Text style={styles.title}>Devino un fermier!</Text>
+                <Text style={styles.text}>Introdu detaliile aici</Text>
                 </View>
-            </View>
-        </Pressable>
+        </DefaultContainer>
     );
 };
 
 const styles = {
     text_container: {
         flex: 1,
-    },
-    container: {
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    card: {
-        width: "100%",
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 16,
-        backgroundColor: COLORS.accent,
-        borderRadius: 8,
-        padding: 16,
-        margin: 8,
     },
     title: {
         color: COLORS.background,
