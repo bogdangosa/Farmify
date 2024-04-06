@@ -5,8 +5,10 @@ import FarmerCard from "../components/Cards/FarmerCard";
 import ProduceCard from "../components/Cards/producecard";
 import axios from "axios";
 import {log} from "expo/build/devtools/logger";
+import FarmImageCard from "../components/Cards/FarmImageCard";
 
 const FarmerScreen = ({route}) => {
+    console.log("Route object:", route);
     const [ProducesData,setProducesData] = useState([]);
 
     const {farm_id} = route.params
@@ -35,7 +37,9 @@ const FarmerScreen = ({route}) => {
         setProducesData(data_array);
     }
     return (
+
         <View style={styles.container}>
+            <FarmImageCard></FarmImageCard>
             <FlatList
                 data={ProducesData}
                 numColumns={3}
@@ -43,7 +47,7 @@ const FarmerScreen = ({route}) => {
                 columnWrapperStyle={{ gap: 8 }}
                 renderItem={({index,item})=>{
                     console.log(index)
-                    if(item.invisible_element!==undefined) {
+                     if(item.invisible_element!==undefined) {
                         console.log("here")
                         return (<ProduceCard style={{opacity: 0}} index={{index}}></ProduceCard>)
                     }
@@ -68,8 +72,11 @@ const styles = StyleSheet.create({
         margin: 20,
         paddingVertical: 20,
         paddingHorizontal: 20,
-        gap: 20
-
+        gap: 20,
+    },
+    containerImage:{
+       position:"absolute"
     }
+
 });
 export default FarmerScreen;
