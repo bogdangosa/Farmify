@@ -6,6 +6,7 @@ import { COLORS } from '../constants/colors';
 import BecomeAFarmerCard from '../components/Cards/BecomeAFarmerCard';
 import { useUserContext } from '../contexts/UserContext';
 import axios from 'axios';
+import BasicSubscribedCardSimple from "../components/Cards/SubcriptionCard";
 
 const SelectMembershipModal = ({  isVisible, onClose }) => {
     const [FarmName, setFarmName] = useState('');
@@ -21,6 +22,7 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
         <Modal animationType="slide" visible={isVisible} onRequestClose={onClose}>
             <View  style={styles.modal_container}>
                 <Text style={styles.modal_title}>Select plan</Text>
+                <BasicSubscribedCardSimple></BasicSubscribedCardSimple>
             </View>
         </Modal>
     );

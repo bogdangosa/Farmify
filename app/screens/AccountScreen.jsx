@@ -6,7 +6,7 @@ import { useUserContext } from '../contexts/UserContext';
 import InputField from '../components/FormElements/InputField';
 import BecomeAFarmerCard from '../components/Cards/BecomeAFarmerCard';
 import BecomeFarmerModal from '../Modals/BecomeFarmerModal';
-
+import SubscribedCardSimple from "../components/Cards/SubcriptionCard";
 const AccountScreen = () => {
     const [Name,setName] = useState('');
     const [BecomeAFarmerModalState,setBecomeAFarmerModalState] = useState(false);
@@ -25,8 +25,7 @@ const AccountScreen = () => {
 
     return (
         <View style={styles.container}>
-            <BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard> 
-
+            <BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard>
             <InputField
                 label={"Nume"}
                 style={styles.input}
