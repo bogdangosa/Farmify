@@ -23,7 +23,7 @@ const FarmerScreen = ({route}) => {
         }
         console.log(farm_id)
         getFarmData(farm_id);
-        getProduceData(farm_id);
+        //getProduceData(farm_id);
     },[farm_id])
 
     const getFarmData = async (farm_id) => {
@@ -55,10 +55,14 @@ const FarmerScreen = ({route}) => {
         setProducesData(data_array);
     }
 
+    useEffect(() => {
+        console.log(FarmData?.image);
+    }, [FarmData]);
+
     return (
         <View>
         <View style={styles.container}>
-            <FarmImageCard farm_name={FarmData?.name}></FarmImageCard>
+            <FarmImageCard farm_name={FarmData?.name} image={FarmData?.image}></FarmImageCard>
             <FlatList
                 data={ProducesData}
                 numColumns={3}
