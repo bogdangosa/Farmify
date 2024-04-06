@@ -64,7 +64,8 @@ const useUser = () => {
                 return await getUserData(data.data);
             case "start_membership":
                 return await startMembership(data.subscription_type);
-
+            case "cancel_subscription":
+                return await startMembership("none");
  
         }
         return null;
