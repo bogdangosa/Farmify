@@ -44,6 +44,17 @@ const useUser = () => {
         console.log(response.data);
         setUser({...user,...response.data,});
     }
+    startMembership = async (subscription_type) => {
+        console.log("here");
+        const response = await axios.post(
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/update_user`,{id:User.uid,"subscription_type":subscription_type}).catch((error) => {
+                console.log("error");
+                console.log(error);
+            });
+        console.log(response.data);
+        getUserData(User);
+    }
+
     const updateUser = async (data) => {
         //console.log(data);
         switch(data.command){
@@ -51,6 +62,9 @@ const useUser = () => {
                 return await AddUserToDatabase(data.data);
             case "get_user":
                 return await getUserData(data.data);
+            case "start_membership":
+                return await startMembership(data.subscription_type);
+
  
         }
         return null;

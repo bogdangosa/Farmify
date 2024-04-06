@@ -6,8 +6,8 @@ import { useUserContext } from '../contexts/UserContext';
 import InputField from '../components/FormElements/InputField';
 import BecomeAFarmerCard from '../components/Cards/BecomeAFarmerCard';
 import BecomeFarmerModal from '../Modals/BecomeFarmerModal';
-import SubscribedCardSimple from "../components/Cards/SubcriptionCard";
-const AccountScreen = () => {
+
+const MapScreen = () => {
     const [Name,setName] = useState('');
     const [BecomeAFarmerModalState,setBecomeAFarmerModalState] = useState(false);
     const user = useUserContext();
@@ -21,21 +21,11 @@ const AccountScreen = () => {
     const SignOut = ()=>{
         console.log("Signing out");
         FIREBASE_AUTH.signOut();
-      }
+    }
 
     return (
         <View style={styles.container}>
-            {!user.is_farmer?<BecomeAFarmerCard onPress={()=>setBecomeAFarmerModalState(true)}></BecomeAFarmerCard>:<></>}
-            <InputField
-                label={"Nume"}
-                style={styles.input}
-                placeholder="Numele tau"
-                onChangeText={setName}
-                value={Name}></InputField>
-            <SimpleButton style={styles.sign_out_button} onPress={()=>SignOut()} title="Sign out"></SimpleButton>
-        
-            <BecomeFarmerModal isVisible={BecomeAFarmerModalState}onClose={()=>setBecomeAFarmerModalState(false)}></BecomeFarmerModal>
-     
+
         </View>
     );
 };
@@ -58,4 +48,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AccountScreen;
+export default MapScreen;
