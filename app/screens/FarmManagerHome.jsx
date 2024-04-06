@@ -95,6 +95,9 @@ const FarmManagerHome = ({navigation}) => {
         else{
             setAddProduceModalState(false);
         }
+
+
+        
     }
 
     return (

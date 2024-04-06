@@ -4,14 +4,20 @@ import SquaredButton from '../components/Buttons/SquaredButton';
 import InputField from '../components/FormElements/InputField';
 import { COLORS } from '../constants/colors';
 import BecomeAFarmerCard from '../components/Cards/BecomeAFarmerCard';
-import { useUserContext } from '../contexts/UserContext';
+import { useUserContext, useUserUpdateContext } from '../contexts/UserContext';
 import axios from 'axios';
 import BasicSubscribedCardSimple from "../components/Cards/SubcriptionCard";
+import SimpleButton from '../components/Buttons/SimpleButton';
 
 const SelectMembershipModal = ({  isVisible, onClose }) => {
     const [FarmName, setFarmName] = useState('');
     const [FarmDescription, setFarmDescription] = useState('');
     const user = useUserContext();
+    const userUpdate = useUserUpdateContext();
+
+    const startSubscription = () =>{
+        userUpdate({command: "start_membership", subscription_type: "basic"}); 
+    }
 
     useEffect(() => {
         console.log("VideoModal is visible: ", isVisible);
@@ -21,8 +27,9 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
     return (
         <Modal animationType="slide" visible={isVisible} onRequestClose={onClose}>
             <View  style={styles.modal_container}>
-                <Text style={styles.modal_title}>Select plan</Text>
+                <Text style={styles.modal_title}>Alege un abonament</Text>
                 <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>
+                <SimpleButton title={"aboneaza-te"} onPress={()=>startSubscription()}></SimpleButton>
             </View>
         </Modal>
     );
