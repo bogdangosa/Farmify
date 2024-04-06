@@ -22,7 +22,7 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
         <Modal animationType="slide" visible={isVisible} onRequestClose={onClose}>
             <View  style={styles.modal_container}>
                 <Text style={styles.modal_title}>Select plan</Text>
-                <BasicSubscribedCardSimple></BasicSubscribedCardSimple>
+                <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>
             </View>
         </Modal>
     );
