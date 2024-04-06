@@ -23,7 +23,6 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
         userUpdate({command: "start_membership", subscription_type: "basic"}); 
     }
 
->>>>>>> 153d46c0b3bc12c23aa6a435f67e7f780358a9a5
     useEffect(() => {
         console.log("VideoModal is visible: ", isVisible);
     }, [isVisible]);
@@ -47,7 +46,9 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
 
                 </View>
                 <Text style={styles.modal_title}>Alege un abonament</Text>
-                <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>
+                {SelectedSubscription==='basic' && <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
+                {SelectedSubscription==='extra' && <BasicSubscribedCardSimple color1={COLORS.extraAccent2} color2={COLORS.extraAccent1} textTitle={'Extra'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
+                {SelectedSubscription==='premium' && <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
                 <SimpleButton title={"aboneaza-te"} onPress={()=>startSubscription()}></SimpleButton>
             </View>
         </Modal>

@@ -5,4 +5,7 @@ export const COLORS = {
     background2: "#FFFFFF",
     primary: "#444444",
     secondary: "#808080",
+    extraAccent1: "#4c669f",
+    extraAccent2: "#192f6a"
+
 }
