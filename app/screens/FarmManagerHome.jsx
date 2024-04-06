@@ -63,11 +63,26 @@ const FarmManagerHome = ({navigation}) => {
         setProducesData(response.data);
     }
 
-    const addProduce = async (name,stock) => {
-        console.log(name,stock);
+    const deleteProduce = async (id) => {
+        console.log(id);
+        const response = await axios.post(
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/delete_produce`,
+            {"produce_id":id}
+            ).catch((error) => {
+            console.log("error");
+            console.log(error);
+        });
+        console.log(response.data);
+        if(response.data.code == "0"){
+            getProduceData(FarmData[0].id);
+        }
+    }
+
+    const addProduce = async (name,stock,price) => {
+        console.log(name,stock,price);
         const response = await axios.post(
             `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/add_produce`,
-            {"farm_id": FarmData[0].id, "produce": name,"stock":stock}
+            {"farm_id": FarmData[0].id, "produce": name,"stock":stock,"price":price}
             ).catch((error) => {
             console.log("error");
             console.log(error);
@@ -88,18 +103,20 @@ const FarmManagerHome = ({navigation}) => {
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh} />
         }>
             <View style={styles.container}>
-                <CurrentOrdersCard number_of_orders={FarmData[0]?.orders}r></CurrentOrdersCard>
+                <CurrentOrdersCard onPress={()=>navigation.navigate("Orders")} number_of_orders={FarmData[0]?.orders}></CurrentOrdersCard>
 
                 <View style={[styles.inline,{marginTop:16}]}>
                     <Text style={styles.title}>Produsele tale</Text>
                     <SquaredButton onPress={()=>setAddProduceModalState(true)} title="adauga"></SquaredButton>
                 </View>
+                <View style={styles.produces_container}>
                 {ProducesData?.map((produce, index) => {
-                    return <ProduceCardExtended key={index} title={produce.produce} stock={produce.stock}></ProduceCardExtended>
+                    return <ProduceCardExtended onDelete={()=>deleteProduce(produce.id)} key={index} title={produce.produce} stock={produce.stock}></ProduceCardExtended>
                 })}
+                </View>
                 
                 
-                <AddProduceModal isVisible={AddProduceModalState} onClose={()=>setAddProduceModalState(false)} addProduce={(name,stock)=>addProduce(name,stock)}></AddProduceModal>
+                <AddProduceModal isVisible={AddProduceModalState} onClose={()=>setAddProduceModalState(false)} addProduce={(name,stock,price)=>addProduce(name,stock,price)}></AddProduceModal>
             
             </View>
         </ScrollView>
@@ -107,6 +124,11 @@ const FarmManagerHome = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+    produces_container: {
+        width: '100%',
+        gap: 16,
+        marginTop: 8,
+    },
     farmer_cards_container: {
         width: "100%",
         gap: 16,

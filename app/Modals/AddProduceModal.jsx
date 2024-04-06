@@ -10,6 +10,7 @@ import { Dialog, PanningProvider } from 'react-native-ui-lib';
 
 const AddProduceModal = ({  isVisible, onClose ,addProduce}) => {
     const [ProduceName, setProduceName] = useState('');
+    const [Price, setPrice] = useState('');
     const user = useUserContext();
 
     useEffect(() => {
@@ -30,9 +31,14 @@ const AddProduceModal = ({  isVisible, onClose ,addProduce}) => {
                     placeholder="Numele produsului adaugat" 
                     value={ProduceName}
                     onChangeText={setProduceName}></InputField>
+                <InputField 
+                    label="Pretul produsului" 
+                    placeholder="Pretul produsului adaugat (in kg)" 
+                    value={Price}
+                    onChangeText={setPrice}></InputField>
                     <View style={styles.save_exit_buttons_container}>
                         <SquaredButton onPress={()=>onClose()} style={{backgroundColor:COLORS.secondary}} title="anuleaza"></SquaredButton>
-                        <SquaredButton onPress={()=>addProduce(ProduceName,0)} title="adauga"></SquaredButton>
+                        <SquaredButton onPress={()=>addProduce(ProduceName,0,Price)} title="adauga"></SquaredButton>
                     </View>
             </View>
         </Dialog>
