@@ -8,7 +8,7 @@ import { useUserContext } from '../contexts/UserContext';
 import axios from 'axios';
 import { Dialog, PanningProvider } from 'react-native-ui-lib';
 
-const EditProduceModal = ({  isVisible, onClose ,editProduce , initial_produce_data}) => {
+const EditProduceModal = ({  isVisible, onClose ,editProduce , initial_produce_data,produce_name}) => {
     const [Price, setPrice] = useState('');
     const [Stock, setStock] = useState('');
 
@@ -32,9 +32,9 @@ const EditProduceModal = ({  isVisible, onClose ,editProduce , initial_produce_d
         panDirection={PanningProvider.Directions.DOWN}>
         <View  style={styles.modal_container}>
             
-                <Text style={styles.modal_title}>Add a produce</Text>
+                <Text style={styles.modal_title}>Modifica {produce_name}</Text>
                 <InputField 
-                    label="Stock" 
+                    label="Stoc" 
                     placeholder="Cate kg aveti" 
                     value={Stock}
                     onChangeText={setStock}></InputField>
