@@ -110,9 +110,10 @@ const FarmManagerHome = ({navigation}) => {
                     <SquaredButton onPress={()=>setAddProduceModalState(true)} title="adauga"></SquaredButton>
                 </View>
                 <View style={styles.produces_container}>
-                {ProducesData?.map((produce, index) => {
+                {ProducesData!=undefined && ProducesData.length>0 ?ProducesData?.map((produce, index) => {
                     return <ProduceCardExtended onDelete={()=>deleteProduce(produce.id)} key={index} title={produce.produce} stock={produce.stock}></ProduceCardExtended>
-                })}
+                }):
+                <Text style={styles.no_produce_text}>Nu ai niciun produs, <Text style={styles.highlighted} onPress={()=>setAddProduceModalState(true)}>adauga!</Text></Text>}
                 </View>
                 
                 
@@ -124,6 +125,18 @@ const FarmManagerHome = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+    no_produce_text: {
+        fontSize: 16,
+        fontFamily: 'Nunito_400Regular',
+        color: COLORS.primary,
+        marginTop: 16,
+        width: '100%',
+        textAlign: 'center',
+    },
+    highlighted:{
+        color: COLORS.accent,
+        fontFamily: 'Nunito_700Bold',
+    },
     produces_container: {
         width: '100%',
         gap: 16,
