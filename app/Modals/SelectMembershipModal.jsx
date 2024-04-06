@@ -34,22 +34,23 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
     return (
         <Modal animationType="slide" visible={isVisible} onRequestClose={onClose}>
             <View  style={styles.modal_container}>
-                <Text style={styles.modal_title}>Select plan</Text>
+                <Text style={styles.modal_title}>Alege un abonament</Text>
                 <View style={styles.buttonContainer}>
                     <SelectableButton title={"Basic"}
                                       onPress={()=> setSelectedSubscription("basic")} isSelected={SelectedSubscription==="basic"}></SelectableButton>
                     <SelectableButton title={"Extra"}
+                                      selected_style={{backgroundColor:COLORS.extraAccent1}}
                                       onPress={()=> setSelectedSubscription("extra")} isSelected={SelectedSubscription==="extra"}></SelectableButton>
                     <SelectableButton title={"Premium"}
+                                      selected_style={{backgroundColor:COLORS.premiumAccent1}}
                                       onPress={()=> setSelectedSubscription("premium")} isSelected={SelectedSubscription==="premium"}></SelectableButton>
 
 
                 </View>
-                <Text style={styles.modal_title}>Alege un abonament</Text>
                 {SelectedSubscription==='basic' && <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
                 {SelectedSubscription==='extra' && <BasicSubscribedCardSimple color1={COLORS.extraAccent2} color2={COLORS.extraAccent1} textTitle={'Extra'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
-                {SelectedSubscription==='premium' && <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
-                <SimpleButton title={"aboneaza-te"} onPress={()=>startSubscription()}></SimpleButton>
+                {SelectedSubscription==='premium' && <BasicSubscribedCardSimple color1={COLORS.premiumAccent1} color2={COLORS.premiumAccent2} textTitle={'Premium'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
+                <SimpleButton style={SelectedSubscription!='basic'?(SelectedSubscription==="extra"?{backgroundColor:COLORS.extraAccent2}:{backgroundColor: COLORS.premiumAccent1}):{}} title={"Aboneaza-te"} onPress={()=>startSubscription()}></SimpleButton>
             </View>
         </Modal>
     );
@@ -58,10 +59,11 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
 
 const styles = StyleSheet.create({
     modal_title: {
-        fontSize: 24,
+        fontSize: 28,
         fontFamily: 'Nunito_700Bold',
         color: COLORS.primary,
         marginBottom: 0,
+        paddingTop:32,
     },
     modal_container:{
         backgroundColor:COLORS.background,
@@ -77,10 +79,8 @@ const styles = StyleSheet.create({
         backgroundColor:COLORS.background,
         flexDirection:"row",
         height: '10%',
-        marginLeft:35,
-        marginRight:35,
-        paddingTop:30,
-        marginTop:-20
+        paddingHorizontal:35,
+        paddingTop:15,
     },
     buttonStyle:{
         backgroundColor:COLORS.background2,
@@ -93,6 +93,12 @@ const styles = StyleSheet.create({
     buttonText:{
         color: COLORS.primary,
         fontSize:30,
+    },
+    buttonExtra:{
+        backgroundColor:COLORS.extraAccent2
+    },
+    buttonPremium:{
+        backgroundColor:COLORS.premiumAccent1
     }
 });
 

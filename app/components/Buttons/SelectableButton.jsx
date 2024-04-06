@@ -2,9 +2,9 @@ import React, { useEffect , useState} from 'react';
 import {Modal, View, Text, StyleSheet, Button, TouchableOpacity, Pressable} from 'react-native';
 import {COLORS} from "../../constants/colors";
 
-const SelectableButton=({title,onPress,isSelected, style1,style2}) =>{
+const SelectableButton=({title,onPress,isSelected, selected_style,style2}) =>{
 return(
-    <Pressable onPress={onPress} style={[styles.buttonStyle,(isSelected?styles.buttonStyleSelected:{})]}>
+    <Pressable onPress={onPress} style={[styles.buttonStyle,(isSelected?[styles.buttonStyleSelected,selected_style]:{})]}>
         <Text style={[styles.buttonText, (isSelected?styles.buttonTextSelected:{})]}>{title}</Text>
     </Pressable>);
 };

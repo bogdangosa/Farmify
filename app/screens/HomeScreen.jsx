@@ -72,7 +72,7 @@ const HomeScreen = ({navigation}) => {
                         );
                     })}
                 </View>
-                <SelectMembershipModal isVisible={OpenSubscriptionModalState}onClose={()=>setOpenSubscriptionModalState(false)}></SelectMembershipModal>
+                <SelectMembershipModal isVisible={OpenSubscriptionModalState} onClose={()=>setOpenSubscriptionModalState(false)}></SelectMembershipModal>
      
             </View>
         </ScrollView>
