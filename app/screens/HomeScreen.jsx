@@ -5,10 +5,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { COLORS } from '../constants/colors';
 import axios from 'axios';
 import NoSubscriptionCard from '../components/Cards/NoSubscriptionCard';
+import SelectMembershipModal from '../Modals/SelectMembershipModal';
 
 const HomeScreen = ({navigation}) => {
     const [FarmersData, setFarmersData] = useState([]);
     const [Refreshing, setRefreshing] = React.useState(false);
+    const [OpenSubscriptionModalState, setOpenSubscriptionModalState] = useState(false);
 
     const onRefresh = React.useCallback(() => {
       setRefreshing(true);
@@ -52,7 +54,7 @@ const HomeScreen = ({navigation}) => {
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh} />
         }>
             <View style={styles.container}>
-                <NoSubscriptionCard></NoSubscriptionCard>
+                <NoSubscriptionCard onPress={()=>setOpenSubscriptionModalState(true)}></NoSubscriptionCard>
                 <View style={styles.farmer_view_top_container}>
                     <Text style={styles.title}>See local farmers</Text>
                     <Text style={styles.map_button} onPress={OpenMap}>Map</Text>
@@ -64,6 +66,8 @@ const HomeScreen = ({navigation}) => {
                         );
                     })}
                 </View>
+                <SelectMembershipModal isVisible={OpenSubscriptionModalState}onClose={()=>setOpenSubscriptionModalState(false)}></SelectMembershipModal>
+     
             </View>
         </ScrollView>
     );

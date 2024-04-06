@@ -1,46 +1,36 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import DefaultContainer from '../Containers/DefaultContainer';
+import { COLORS } from '../../constants/colors';
+import CarrotSvg from '../../../assets/carrot.svg';
+import SquaredSvgButton from './SquaredSvgButton';
 
-const ProduceCardExtended = ({ title, image, description }) => {
+const ProduceCardExtended = ({ title, stock,style,onPress}) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.content}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.description}>{description}</Text>
-            </View>
-        </View>
+        <DefaultContainer onPress={onPress} style={{backgroundColor:COLORS.background2}}>
+            <SquaredSvgButton color={"#DDDDDD"}><CarrotSvg height="32" width="32"></CarrotSvg></SquaredSvgButton>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.stock}>{stock}<Text style={styles.type}>kg</Text></Text>
+        </DefaultContainer>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        backgroundColor: '#fff',
-        borderRadius: 8,
-        padding: 16,
-        marginBottom: 16,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    image: {
-        width: 80,
-        height: 80,
-        borderRadius: 8,
-        marginRight: 16,
-    },
-    content: {
-        flex: 1,
-    },
     title: {
+        color: COLORS.primary,
         fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 8,
+        fontFamily: "Nunito_700Bold",
+    },
+    stock: {
+        marginLeft: "auto",
+        alignSelf: "flex-end",
+        color: COLORS.primary,
+        fontSize: 20,
+        fontFamily: "Nunito_400Regular",
+    },
+    type: {
+        fontSize: 12,
+        color: COLORS.secondary,
     },
     description: {
         fontSize: 14,
