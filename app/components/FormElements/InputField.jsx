@@ -2,12 +2,13 @@ import React from 'react';
 import { TextInput , StyleSheet,View,Text} from 'react-native';
 import { COLORS } from '../../constants/colors';
 
-const InputField = ({value,label,onChangeText,placeholder,styles,multiline}) => {
+const InputField = ({value,label,onChangeText,placeholder,styles,multiline,keyboardType}) => {
     return (
         <View style={input_styles.input_field_container}>
             <Text style={input_styles.label}>{label}</Text>
             <TextInput
                 placeholder={placeholder}
+                keyboardType={keyboardType?keyboardType:"default"}
                 placeholderTextColor="#AAAAAA"
                 style={[input_styles.input,styles]}
                 value={value}
