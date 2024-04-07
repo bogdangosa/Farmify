@@ -7,12 +7,12 @@ import axios from 'axios';
 import { useUserContext } from '../contexts/UserContext';
 
 
-const OrdersScreen = ({navigation}) => {
+const OrdersScreen = () => {
     const user = useUserContext(); 
     const [Orders, setOrders] = useState([]);
 
-    useEffect(() => { 
-        console.log("User is: ", user);  
+    useEffect(() => {
+        console.log("User is: ", user);
         if (user == undefined){
             return
         }
@@ -23,10 +23,10 @@ const OrdersScreen = ({navigation}) => {
         console.log(user_id);
         const response = await axios.post(
             `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/get_orders`,{user_id:user_id}).catch((error) => {
-                console.log("error here");
-                console.log(error);
-            });
-        
+            console.log("error here");
+            console.log(error);
+        });
+
         console.log("response  ordeee");
         console.log(response.data);
         setOrders(response.data);
@@ -45,7 +45,7 @@ const OrdersScreen = ({navigation}) => {
     return (
         <ScrollView
             refreshControl={
-            <RefreshControl refreshing={Refreshing} onRefresh={onRefresh}/> }>
+                <RefreshControl refreshing={Refreshing} onRefresh={onRefresh}/> }>
             <View style={styles.mainContainer}>
                 <Text style={styles.title}>Comenzile mele</Text>
                 {Orders!=undefined && Orders.length>0 ? Orders.map((order,index) => {
