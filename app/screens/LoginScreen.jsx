@@ -24,7 +24,16 @@ const LoginScreen = ({navigation}) => {
         }
         catch(error){
             console.log(error);
-            setErrorText(error.message);
+            switch(error.message){
+                case "Firebase: Error (auth/user-not-found).":
+                    setErrorText("User not found!");
+                    break;
+                case "Firebase: Error (auth/invalid-email).":
+                    setErrorText("Not a valid email");
+                    break;
+                default:
+                    setErrorText(error.message);
+            }
         }
         finally{
             setLoading(false);
@@ -50,21 +59,22 @@ const LoginScreen = ({navigation}) => {
             </View>
             <InputField
                 style={styles.input}
-                placeholder="your Email"
+                placeholder="Email"
                 label={"Email"}
                 value={Email}
                 onChangeText={setEmail}
             />
             <InputField
                 style={styles.input}
-                label={"Password"}
-                placeholder="Password"
-                secureTextEntry
+                label={"Parola"}
+                placeholder="Parola"
+                secureTextEntry={true}
                 value={Password}
                 onChangeText={setPassword}
             />
+            <Text style={styles.text_error}>{ErrorText}</Text>
             <SimpleButton title="Login" onPress={handleLogin} />
-            <Text style={styles.forgot_password_text}>Forgot password? <Text style={styles.forgot_password_text_highlight} onPress={()=>sendResetPasswordEmail()}>get it here</Text></Text>  
+            <Text style={styles.forgot_password_text}>Ti-ai uitat parola? <Text style={styles.forgot_password_text_highlight} onPress={()=>sendResetPasswordEmail()}>recupereazo</Text></Text>  
         
         </View>
     );

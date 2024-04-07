@@ -17,15 +17,16 @@ const SignUpScreen = ({navigation}) => {
     const updateUser = useUserUpdateContext();
 
     const handleSignup = () => {
+        const email = Email.replace(/\s/g, '');
         setLoading(true);
         console.log(Email,Password);
-        const response = createUserWithEmailAndPassword(auth,Email,Password  ).then(async(userCredential) => {
+        const response = createUserWithEmailAndPassword(auth,email,Password  ).then(async(userCredential) => {
             console.log(userCredential);
             let response = await updateUser({
                 "command":"add_user_to_database",
                 "data": {
                   "name":Name,
-                    "email":Email,
+                    "email":email,
                     "uid":userCredential.user.uid
                 }
               });
@@ -33,6 +34,24 @@ const SignUpScreen = ({navigation}) => {
 
         }).catch((error) => {
             console.log(error);
+            switch(error.message){
+                case "Firebase: Error (auth/wrong-password).":
+                  setErrorText("Wrong password!")
+                  break;
+                case "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).":
+                  setErrorText("To many attemts, try again later!");
+                  break;
+                case "Firebase: Error (auth/user-not-found).":
+                 setErrorText("User not found!");
+                 break;
+                case "Firebase: Error (auth/email-already-in-use).":
+                 setErrorText("Email already in use!");
+                  break;
+                default:
+                  setErrorText("Choose a new password at least 6 charancters long.");
+                  console.log(error.message);
+                  break;
+              }
             setLoading(false);
         });
         console.log(response);
@@ -46,27 +65,28 @@ const SignUpScreen = ({navigation}) => {
                 <Text style={[styles.top_bar_buttons_text,{color:COLORS.accent}]}>Sign up</Text>
             </View>
             <InputField
-                label={"Name"}
+                label={"Nume"}
                 style={styles.input}
-                placeholder="Your name"
+                placeholder="Numele tau"
                 onChangeText={setName}
                 value={Name}
             />
             <InputField
                 label={"Email"}
                 style={styles.input}
-                placeholder="Your email"
+                placeholder="Emailul tau"
                 onChangeText={setEmail}
                 value={Email}
             />
             <InputField
-                label={"Password"}
+                label={"Parola"}
                 style={styles.input}
-                placeholder="Your Password"
-                secureTextEntry
+                placeholder="O parola de min 6 caractere"
+                secureTextEntry={true} 
                 onChangeText={setPassword}
                 value={Password}
             />
+            <Text style={styles.text_error}>{ErrorText}</Text>
             <SimpleButton title="Sign Up" onPress={handleSignup} />
             <Text style={styles.forgot_password_text}>You already have an account? <Text style={styles.forgot_password_text_highlight} onPress={()=>navigation.navigate("Login")}>login</Text></Text>  
         

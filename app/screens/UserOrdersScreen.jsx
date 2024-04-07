@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useUserContext } from '../contexts/UserContext';
 
 
-const OrdersScreen = () => {
+const OrdersScreen = ({navigation}) => {
     const user = useUserContext(); 
     const [Orders, setOrders] = useState([]);
 
@@ -48,9 +48,10 @@ const OrdersScreen = () => {
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh}/> }>
             <View style={styles.mainContainer}>
                 <Text style={styles.title}>Comenzile mele</Text>
-                {Orders?.map((order,index) => {
+                {Orders!=undefined && Orders.length>0 ? Orders.map((order,index) => {
                     return <OrderCards key={index} produce_name={order.produce_name} amount={order.amount}></OrderCards>
-                })}
+                }):
+                <Text style={styles.no_produce_text}>Nu ai nicio comanda, <Text style={styles.highlighted} onPress={()=>navigation.navigate("Home")}> comanda-ti!</Text></Text>}
             </View>
         </ScrollView>
     );
@@ -58,6 +59,18 @@ const OrdersScreen = () => {
 
 
 const styles = StyleSheet.create({
+    no_produce_text: {
+        fontSize: 16,
+        fontFamily: 'Nunito_400Regular',
+        color: COLORS.primary,
+        marginTop: 16,
+        width: '100%',
+        textAlign: 'center',
+    },
+    highlighted:{
+        color: COLORS.accent,
+        fontFamily: 'Nunito_700Bold',
+    },
     title: {
         fontFamily: "Nunito_700Bold",
         fontSize:25,

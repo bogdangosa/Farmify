@@ -13,6 +13,7 @@ import SimpleButton from '../components/Buttons/SimpleButton';
 import {Icon} from "react-native-ui-lib";
 import SquaredSvgButton from "../components/Cards/SquaredSvgButton";
 import CarrotSvg from "../../assets/carrot.svg";
+import { subscription_prices } from '../constants/subscription_prices';
 
 
 const SelectMembershipModal = ({  isVisible, onClose }) => {
@@ -23,7 +24,7 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
     const userUpdate = useUserUpdateContext();
 
     const startSubscription = () =>{
-        userUpdate({command: "start_membership", subscription_type: "basic"}); 
+        userUpdate({command: "start_membership", subscription_type: SelectedSubscription}); 
     }
 
     useEffect(() => {
@@ -50,11 +51,11 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
 
 
                 </View>
-                {SelectedSubscription==='basic' && <BasicSubscribedCardSimple color1={COLORS.accent2} color2={COLORS.accent} textTitle={'Basic'} textPrice={'20 Lei/luna'}></BasicSubscribedCardSimple>}
+                {SelectedSubscription==='basic' && <BasicSubscribedCardSimple color1={COLORS.accent2} color2={COLORS.accent} textTitle={'Basic'} textPrice={`${subscription_prices.basic} Lei/luna`}></BasicSubscribedCardSimple>}
 
-                {SelectedSubscription==='extra' && <BasicSubscribedCardSimple color1={COLORS.extraAccent1} color2={COLORS.extraAccent2} textTitle={'Extra'}  textPrice={'35 Lei/luna'}></BasicSubscribedCardSimple>}
+                {SelectedSubscription==='extra' && <BasicSubscribedCardSimple color1={COLORS.extraAccent1} color2={COLORS.extraAccent2} textTitle={'Extra'}  textPrice={`${subscription_prices.extra} Lei/luna`}></BasicSubscribedCardSimple>}
 
-                {SelectedSubscription==='premium' && <BasicSubscribedCardSimple color1={COLORS.premiumAccent2} color2={COLORS.premiumAccent1} textTitle={'Premium'}  textPrice={'45 Lei/luna'}></BasicSubscribedCardSimple>}
+                {SelectedSubscription==='premium' && <BasicSubscribedCardSimple color1={COLORS.premiumAccent2} color2={COLORS.premiumAccent1} textTitle={'Premium'}  textPrice={`${subscription_prices.premium} Lei/luna`}></BasicSubscribedCardSimple>}
 
                 <SimpleButton style={SelectedSubscription!='basic'?(SelectedSubscription==="extra"?{backgroundColor:COLORS.extraAccent2}:{backgroundColor: COLORS.premiumAccent1}):{}} title={"Aboneaza-te"} onPress={()=>startSubscription()}></SimpleButton>
                 {SelectedSubscription==='basic' &&

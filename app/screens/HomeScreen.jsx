@@ -7,6 +7,7 @@ import axios from 'axios';
 import NoSubscriptionCard from '../components/Cards/NoSubscriptionCard';
 import SelectMembershipModal from '../Modals/SelectMembershipModal';
 import { useUserContext } from '../contexts/UserContext';
+import HugeMorcovSvg from "../../assets/huge-bg-carrot.svg"
 import SubscriptionCardHome from '../components/Cards/SubscriptionCardHome';
 
 const HomeScreen = ({navigation}) => {
@@ -56,8 +57,10 @@ const HomeScreen = ({navigation}) => {
         <ScrollView
         refreshControl={
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh} />
-        }>
+        } style={styles.scroll_view_container}>
             <View style={styles.container}>
+                <HugeMorcovSvg style={styles.background_carrot1} height={"256"} width={"256"}></HugeMorcovSvg>
+                <HugeMorcovSvg style={styles.background_carrot2} height={"256"} width={"256"}></HugeMorcovSvg>
                 {user?.subscription_type=="none"?<NoSubscriptionCard onPress={()=>setOpenSubscriptionModalState(true)}></NoSubscriptionCard>:(
                     user?.subscription_type!=undefined?<SubscriptionCardHome subscription_type={user.subscription_type}></SubscriptionCardHome>:<></>
                 )}
@@ -80,11 +83,25 @@ const HomeScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+    scroll_view_container: {
+        height:  "100%",
+    },
+    background_carrot1 : {
+        position:"absolute",
+        right:-40,
+        top:"30%",
+    },
+    background_carrot2 : {
+        position:"absolute",
+        left:-40,
+        top:"60%",
+    },
     farmer_cards_container: {
         width: "100%",
         gap: 16,
     },
     container: {
+        position:"relative",
         padding: 10,
         paddingTop: 16,
         flex: 1,

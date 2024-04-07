@@ -11,7 +11,8 @@ const SubscriptionCardHome = ({onPress,subscription_type}) => {
         <DefaultContainer onPress={onPress}>
                 <SquaredSvgButton color={COLORS.accent2}><CarrotSvg height="32" width="32"></CarrotSvg></SquaredSvgButton>
                 <View style={styles.text_container}>
-                <Text style={styles.title}>abonamentul: {subscription_type}</Text>
+                <Text style={styles.title}>Abonament: {subscription_type}</Text>
+                {/*<Text style={styles.price}></Text>*/}
                 </View>
         </DefaultContainer>
     );
