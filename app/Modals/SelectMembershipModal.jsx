@@ -10,6 +10,9 @@ import BasicSubscribedCardSimple from "../components/Cards/SubcriptionCard";
 
 import SelectableButton from "../components/Buttons/SelectableButton";
 import SimpleButton from '../components/Buttons/SimpleButton';
+import {Icon} from "react-native-ui-lib";
+import SquaredSvgButton from "../components/Cards/SquaredSvgButton";
+import CarrotSvg from "../../assets/carrot.svg";
 
 
 const SelectMembershipModal = ({  isVisible, onClose }) => {
@@ -47,17 +50,65 @@ const SelectMembershipModal = ({  isVisible, onClose }) => {
 
 
                 </View>
-                {SelectedSubscription==='basic' && <BasicSubscribedCardSimple color1={COLORS.accent} color2={COLORS.accent2} textTitle={'Basic'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
-                {SelectedSubscription==='extra' && <BasicSubscribedCardSimple color1={COLORS.extraAccent2} color2={COLORS.extraAccent1} textTitle={'Extra'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
-                {SelectedSubscription==='premium' && <BasicSubscribedCardSimple color1={COLORS.premiumAccent1} color2={COLORS.premiumAccent2} textTitle={'Premium'} textDescription={'Hello\nHello\nHello'} textPrice={'20 Lei/Month'}></BasicSubscribedCardSimple>}
+                {SelectedSubscription==='basic' && <BasicSubscribedCardSimple color1={COLORS.accent2} color2={COLORS.accent} textTitle={'Basic'} textPrice={'20 Lei/luna'}></BasicSubscribedCardSimple>}
+
+                {SelectedSubscription==='extra' && <BasicSubscribedCardSimple color1={COLORS.extraAccent1} color2={COLORS.extraAccent2} textTitle={'Extra'}  textPrice={'35 Lei/luna'}></BasicSubscribedCardSimple>}
+
+                {SelectedSubscription==='premium' && <BasicSubscribedCardSimple color1={COLORS.premiumAccent2} color2={COLORS.premiumAccent1} textTitle={'Premium'}  textPrice={'45 Lei/luna'}></BasicSubscribedCardSimple>}
+
                 <SimpleButton style={SelectedSubscription!='basic'?(SelectedSubscription==="extra"?{backgroundColor:COLORS.extraAccent2}:{backgroundColor: COLORS.premiumAccent1}):{}} title={"Aboneaza-te"} onPress={()=>startSubscription()}></SimpleButton>
+                {SelectedSubscription==='basic' &&
+                <View style={styles.bulletPointContainer}>
+                    <SquaredSvgButton color={COLORS.accent2} style={{flex: 7}}><CarrotSvg height="32" width="32"></CarrotSvg></SquaredSvgButton>
+                    <View style={{flex: 1}}>
+                        <Text style={styles.textDescription}>Pachet esential</Text>
+                        <Text style={styles.textDescriptionSmall}>saptamanal de la 3 vanzatori locali</Text>
+                    </View>
+                </View>}
+                {SelectedSubscription==='extra' &&
+                <View style={styles.bulletPointContainer}>
+                    <SquaredSvgButton color={COLORS.extraAccent1} style={{flex: 7}}><CarrotSvg height="32" width="32"></CarrotSvg></SquaredSvgButton>
+                    <View style={{flex: 1}}>
+                        <Text style={styles.textDescription}>Pachet standard</Text>
+                        <Text style={styles.textDescriptionSmall}>saptamanal de la 5 vanzatori locali</Text>
+                    </View>
+                </View>}
+                {SelectedSubscription==='premium' &&
+                <View style={styles.bulletPointContainer}>
+                    <SquaredSvgButton color={COLORS.premiumAccent2} style={{flex: 7}}><CarrotSvg height="32" width="32"></CarrotSvg></SquaredSvgButton>
+                    <View style={{flex: 1}}>
+                        <Text style={styles.textDescription}>Pachet extra</Text>
+                        <Text style={styles.textDescriptionSmall}>saptamanal de la 7 vanzatori locali</Text>
+                    </View>
+                </View>
+
+                }
             </View>
         </Modal>
     );
 };
 
 
+
 const styles = StyleSheet.create({
+    textDescription:{
+        fontSize: 28,
+        fontFamily: 'Nunito_700Bold',
+        marginLeft: 15,
+    },
+    textDescriptionSmall:{
+        fontSize: 20,
+        fontFamily: 'Nunito_700Bold',
+        marginLeft: 20,
+    },
+    bulletPointContainer:{
+        flexDirection:"row",
+        marginTop: 30,
+    },
+    innerBulletPointContainer:{
+        flexDirection:"column",
+
+    },
     modal_title: {
         fontSize: 28,
         fontFamily: 'Nunito_700Bold',

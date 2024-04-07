@@ -8,9 +8,7 @@ const BasicSubscribedCardSimple=({color1, color2, textTitle, textDescription, te
             colors={[color1, color2] }
             style={styles.containerGradient}>
             <Text style={styles.TextTitle}>{textTitle}</Text>
-            <View style={styles.bulet_points_container}>
-                <Text style={styles.textDescription}>{textDescription}</Text>
-            </View>
+
             <Text style={styles.textPrice}>{textPrice}</Text>
         </LinearGradient>
     )
@@ -32,6 +30,7 @@ const styles = StyleSheet.create({
         fontFamily: "Nunito_700Bold",
         color:COLORS.background,
         padding: 10,
+        marginBottom: 25,
     },
 
     textDescription:{
