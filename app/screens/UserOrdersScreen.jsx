@@ -18,7 +18,6 @@ const OrdersScreen = () => {
         <ScrollView
             refreshControl={
             <RefreshControl refreshing={Refreshing} onRefresh={onRefresh}/> }>
-            }
             <View style={styles.mainContainer}>
                 <Text style={styles.title}>Orders Screen</Text>
                 <OrderCards></OrderCards>
