@@ -19,7 +19,7 @@ const FarmImageCard = ({farm_name,image}) => {
         <View style={styles.container}>
             <View style={styles.someothercontainer}>
             <Image
-                source={farmtest}
+                source={image==undefined?farmtest:{uri:image}}
                 style={styles.image}
                 resizeMode="cover"
             />
@@ -47,17 +47,18 @@ const styles = StyleSheet.create({
     text:{
       fontFamily: "Nunito_700Bold",
       fontSize:30,
+      paddingLeft: 20,
       zIndex: 1,
       paddingTop:100,
       color: COLORS.background,
     },
     image: {
         objectFit:"cover",
-        height:'120%',
-        aspectRatio:16/9,
-        left:-20,
+        height:"110%",
+        width:"100%",
+        left:0,
         position: "absolute",
-        top:-20,
+        top:0,
         zIndex:-1,
     },
     containerBackground: {

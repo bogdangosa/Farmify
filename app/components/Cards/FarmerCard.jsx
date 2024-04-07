@@ -5,7 +5,7 @@ const FarmerCard = ({title,description,onPress}) => {
     return (
         <Pressable style={styles.card} onPress={onPress}>
             <Text style={styles.title}> {title} </Text>
-            <Text style={styles.description}> {description} </Text>
+            <Text style={styles.description} numberOfLines={2}> {description} </Text>
         </Pressable>
     );
 };

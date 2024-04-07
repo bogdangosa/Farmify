@@ -72,29 +72,30 @@ const FarmerScreen = ({route}) => {
     }, [FarmData]);
 
     return (
-        <View>
         <View style={styles.container}>
             <FarmImageCard farm_name={FarmData?.name} image={FarmData?.image}></FarmImageCard>
-            <FlatList
-                data={ProducesData}
-                numColumns={3}
-                contentContainerStyle={{ gap: 8 }}
-                columnWrapperStyle={{ gap: 8 }}
-                renderItem={({index,item})=>{
-                    console.log(index)
-                     if(item.invisible_element!==undefined) {
-                        console.log("here")
-                        return (<ProduceCard style={{opacity: 0}} index={{index}}></ProduceCard>)
-                    }
-                    return (<ProduceCard onPress={()=>setProduceIndex(index)}  index={index} title={item.produce}/>);
-                }}
-                keyExtractor={(item) => item.id}
-                style={styles.grid_layout}>
+            <View style={{paddingHorizontal:20,gap:10,width:"100%"}}>            
+                <Text style={styles.title2}>Produsele fermei</Text>
+                <FlatList
+                    data={ProducesData}
+                    numColumns={3}
+                    contentContainerStyle={{ gap: 8 }}
+                    columnWrapperStyle={{ gap: 8 }}
+                    renderItem={({index,item})=>{
+                        console.log(index)
+                        if(item.invisible_element!==undefined) {
+                            console.log("here")
+                            return (<ProduceCard style={{opacity: 0}} index={{index}}></ProduceCard>)
+                        }
+                        return (<ProduceCard onPress={()=>setProduceIndex(index)}  index={index} title={item.produce}/>);
+                    }}
+                    keyExtractor={(item) => item.id}
+                    style={styles.grid_layout}>
 
-            </FlatList>
+                </FlatList>
+            </View>
+
             <AddOrderModal addOrder={(ammount,produce_id)=>addOrder(ammount,produce_id)} data={ProducesData[produceIndex]} isVisible={produceIndex!=undefined} onClose={() =>setProduceIndex(undefined)}></AddOrderModal>
-        </View>
-            <Text style={styles.textContainer}>Produsele fermei</Text>
         </View>
     );
 };
@@ -109,8 +110,6 @@ const styles = StyleSheet.create({
         overflow:"visible",
         width:'100%',
         justifyContent: "space-between",
-        paddingVertical: 20,
-        paddingHorizontal: 20,
         gap: 20,
     },
     containerImage:{
@@ -118,13 +117,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         gap: 20
     },
-    textContainer:{
-        position:"absolute",
-        paddingTop:200, //change this to move my produce
-        paddingHorizontal: 20,
+    title2: {
+        color:COLORS.primary,
         fontFamily: "Nunito_700Bold",
-        fontSize:25,
-        color: COLORS.primary
+        fontSize:22,
     }
 
 });
