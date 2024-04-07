@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         width: '100%',
         position: "relative",
         zIndex: -1,
-        paddingBottom:80, // change this to move produce down
+        paddingBottom:40, // change this to move produce down
 
     },
     text:{
