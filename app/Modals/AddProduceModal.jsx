@@ -25,7 +25,7 @@ const AddProduceModal = ({  isVisible, onClose ,addProduce}) => {
         panDirection={PanningProvider.Directions.DOWN}>
         <View  style={styles.modal_container}>
             
-                <Text style={styles.modal_title}>Add a produce</Text>
+                <Text style={styles.modal_title}>Adauga produs</Text>
                 <InputField 
                     label="Numele produsului" 
                     placeholder="Numele produsului adaugat" 

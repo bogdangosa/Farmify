@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, StyleSheet, Image, Text, Pressable, ImageBackground} from 'react-native';
 import { COLORS } from '../../constants/colors';
 import SquaredSvgButton from './SquaredSvgButton';
@@ -6,9 +6,14 @@ import CarrotSvg from '../../../assets/carrot.svg';
 import farmtest from '../../../assets/farmtest.jpg'
 import { useWindowDimensions } from 'react-native';
 
-const FarmImageCard = ({farm_name}) => {
+const FarmImageCard = ({farm_name,image}) => {
+    
 
     const { height, width } = useWindowDimensions();
+
+    useEffect(() => {
+        console.log("Farm image is: ", image);
+    }, [image]);
 
     return (
         <View style={styles.container}>

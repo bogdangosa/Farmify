@@ -8,6 +8,7 @@ import {log} from "expo/build/devtools/logger";
 import FarmImageCard from "../components/Cards/FarmImageCard";
 import {COLORS} from "../constants/colors";
 import AddOrderModal from "../Modals/AddOrderModal";
+import { useUserContext } from '../contexts/UserContext';
 
 const FarmerScreen = ({route}) => {
     console.log("Route object:", route);
@@ -16,6 +17,7 @@ const FarmerScreen = ({route}) => {
     const {farm_id} = route.params
     const [produceIndex, setProduceIndex] = useState(undefined)
     const [isVisible, setIsVisible] = useState(false)
+    const user = useUserContext();
 
     useEffect(()=>{
         if (farm_id == undefined){
@@ -55,10 +57,24 @@ const FarmerScreen = ({route}) => {
         setProducesData(data_array);
     }
 
+    const addOrder = async (amount,produce_id) => {
+        const response = await axios.post(
+            `${process.env.EXPO_PUBLIC_SERVER_ADRESS}/api/add_order`, {'user_id': user.uid,"amount":parseInt(amount),"produce_id":produce_id}).catch((error) => {
+            console.log("error");
+            console.log(error);
+
+        });
+        log(response.data);
+    }
+
+    useEffect(() => {
+        console.log(FarmData?.image);
+    }, [FarmData]);
+
     return (
         <View>
         <View style={styles.container}>
-            <FarmImageCard farm_name={FarmData?.name}></FarmImageCard>
+            <FarmImageCard farm_name={FarmData?.name} image={FarmData?.image}></FarmImageCard>
             <FlatList
                 data={ProducesData}
                 numColumns={3}
@@ -76,7 +92,7 @@ const FarmerScreen = ({route}) => {
                 style={styles.grid_layout}>
 
             </FlatList>
-            <AddOrderModal data={ProducesData[produceIndex]} isVisible={produceIndex!=undefined} onClose={() =>setProduceIndex(undefined)}></AddOrderModal>
+            <AddOrderModal addOrder={(ammount,produce_id)=>addOrder(ammount,produce_id)} data={ProducesData[produceIndex]} isVisible={produceIndex!=undefined} onClose={() =>setProduceIndex(undefined)}></AddOrderModal>
         </View>
             <Text style={styles.textContainer}>Produsele fermei</Text>
         </View>

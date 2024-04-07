@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import { COLORS } from '../../constants/colors';
 
-const OrderCards = () => {
+const OrderCards = ({amount,produce_name}) => {
     return(
         <View style={styles.cardContainer}>
-            <Text style={styles.textElementTitle}>Ordered 10kg cartof from:</Text>
+            <Text style={styles.textElementTitle}>Ordered {amount}kg {produce_name} from:</Text>
             <Text style={styles.textElementName}>
         MARINEL NICU SRL.
             </Text>
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
         position:'relative',
         flexDirection: "column",
         backgroundColor:COLORS.background2,
-        width: '80%',
-        paddingHorizontal: 10,
+        width: '94%',
+        paddingHorizontal: 15,
         paddingVertical: 30,
-        marginVertical: 20,
+        marginVertical: 5,
         gap: 5,
         borderRadius:10,
         borderLeftWidth: 10,

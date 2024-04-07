@@ -8,7 +8,7 @@ import { useUserContext } from '../contexts/UserContext';
 import axios from 'axios';
 import { Dialog, PanningProvider } from 'react-native-ui-lib';
 
-const AddOrderModal = ({  isVisible, onClose, stock, data}) => {;
+const AddOrderModal = ({  isVisible, onClose, stock, data,addOrder}) => {;
     const [amount, setAmount] = useState('');
     const user = useUserContext();
 
@@ -29,10 +29,11 @@ const AddOrderModal = ({  isVisible, onClose, stock, data}) => {;
                     label="Cantitatea"
                     placeholder="Selecteaza cantitatea"
                     Amount={amount}
+                    keyboardType="numeric"
                     onChangeText={setAmount}></InputField>
                 <View style={styles.save_exit_buttons_container}>
                     <SquaredButton onPress={()=>onClose()} style={{backgroundColor:COLORS.secondary}} title="anuleaza"></SquaredButton>
-                    <SquaredButton onPress={()=>editProduce(Stock,Price)} title="comanda"></SquaredButton>
+                    <SquaredButton onPress={()=>addOrder(amount,data.id)} title="comanda"></SquaredButton>
                 </View>
             </View>
         </Dialog>
