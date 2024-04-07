@@ -36,19 +36,19 @@ const SignUpScreen = ({navigation}) => {
             console.log(error);
             switch(error.message){
                 case "Firebase: Error (auth/wrong-password).":
-                  setErrorText("Wrong password!")
+                  setErrorText("Parola gresita!")
                   break;
                 case "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).":
-                  setErrorText("To many attemts, try again later!");
+                  setErrorText("Prea multe incercari, incearca mai tarziu!");
                   break;
                 case "Firebase: Error (auth/user-not-found).":
-                 setErrorText("User not found!");
+                 setErrorText("Utilizatorul nu a fost gasit!");
                  break;
                 case "Firebase: Error (auth/email-already-in-use).":
-                 setErrorText("Email already in use!");
+                 setErrorText("Email deja in folosinta!");
                   break;
                 default:
-                  setErrorText("Choose a new password at least 6 charancters long.");
+                  setErrorText("Parola trebuie sa aiba minim 6 caractere .");
                   console.log(error.message);
                   break;
               }
