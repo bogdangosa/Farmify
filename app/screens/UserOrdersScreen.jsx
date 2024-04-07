@@ -15,10 +15,7 @@ const OrdersScreen = () => {
         }, 2000)
     }, []);
     return (
-        <ScrollView
-            refreshControl={
-            <RefreshControl refreshing={Refreshing} onRefresh={onRefresh}/> }>
-            }
+        <ScrollView>
             <View style={styles.mainContainer}>
                 <Text style={styles.title}>Orders Screen</Text>
                 <OrderCards></OrderCards>
